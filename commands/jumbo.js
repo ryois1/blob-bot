@@ -1,5 +1,6 @@
 module.exports = {
-	name: 'jumbo',
+    name: 'jumbo',
+    usage: '<emoji>',
 	description: 'Wumbo an emoji!',
     async execute(message, args) {
         const https = require('https');

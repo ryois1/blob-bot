@@ -1,5 +1,6 @@
 module.exports = {
-	name: 'kick',
+    name: 'kick',
+    usage: '<user>',
 	description: 'Kick a member',
 	async execute(message) {
         if (message.member.hasPermission("KICK_MEMBERS")) {

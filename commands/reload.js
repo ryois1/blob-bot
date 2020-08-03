@@ -1,5 +1,6 @@
 module.exports = {
-	name: 'reload',
+    name: 'reload',
+    usage: '<command>',
 	description: 'Reloads a command',
 	execute(message, args) {
         if (message.member.hasPermission("ADMINISTRATOR")) {

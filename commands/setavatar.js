@@ -1,5 +1,6 @@
 module.exports = {
-	name: 'setavatar',
+    name: 'setavatar',
+    usage: '<image>',
 	description: 'Set the bot\'s avatar',
 	async execute(message, args) {
         if (message.member.hasPermission("ADMINISTRATOR")) {

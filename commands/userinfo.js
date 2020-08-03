@@ -1,7 +1,8 @@
 module.exports = {
-	name: 'userinfo',
+    name: 'userinfo',
+    usage: '<user>',
 	description: 'Get the info of a user',
-	async execute(message) {
+	async execute(message, args) {
         const Discord = require('discord.js'); 
         const member = message.mentions.members.first() || message.guild.members.get(args[0]) || message.member;
         let target = message.mentions.users.first() || message.author
