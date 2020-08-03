@@ -18,7 +18,7 @@ module.exports = {
                         message.channel.send(`${messageSend}`, {files: [`https://cdn.discordapp.com/emojis/${emojiID}.png?v=1`]})
                     }else{
                         message.reply(`This emoji is probably a Discord unicode emoji, these are not supported yet.`)
-                    }})
+                }})
             }})
         }
 	},

@@ -2,6 +2,7 @@ module.exports = {
 	name: 'reload',
 	description: 'Reloads a command',
 	execute(message, args) {
+        if (message.member.hasPermission("ADMINISTRATOR")) {
 		if (!args.length) return message.channel.send(`You didn't pass any command to reload, ${message.author}!`);
         const commandName = args[0].toLowerCase();
         const command = message.client.commands.get(commandName)
@@ -16,6 +17,8 @@ module.exports = {
             message.channel.send(`There was an error while reloading a command \`${command.name}\`:\n\`${error.message}\``);
         }
         message.channel.send(`Command \`${command.name}\` was reloaded!`);
-
-	},
+	} else {
+        message.reply("You do not have permissions to use this command");
+    }
+}
 };
