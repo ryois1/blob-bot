@@ -17,8 +17,9 @@ client.on("message", (message) => {
   const args = message.content.slice(prefix.length).trim().split(/ +/);
   const commandName = args.shift().toLowerCase();
 
-  if (!client.commands.has(commandName)) return;
-  const command = client.commands.get(commandName);
+  const command = client.commands.get(commandName)
+    || client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
+  if (!command) return;
   if (command.args && !args.length) {
     let reply = `You didn't provide any arguments, ${message.author}!`;
     if (command.usage) {
@@ -27,7 +28,7 @@ client.on("message", (message) => {
     return message.channel.send(reply);
   }
   try {
-    command.execute(message, args);
+    command.execute(message, args, client, token);
   } catch (error) {
     console.error(error);
     message.reply("there was an error trying to execute that command!");
