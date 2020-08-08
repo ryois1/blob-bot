@@ -35,7 +35,7 @@ module.exports = {
           .catch((error) => message.channel.send(`Error: ${error}`));
       }
     } else {
-      message.reply("You do not have permissions to use this command");
+      message.reply(`you do not have permissions to use this command!`);
     }
   },
 };

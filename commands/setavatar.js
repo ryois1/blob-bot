@@ -12,7 +12,7 @@ module.exports = {
         .then((user) => message.channel.send(`Changed avatar of bot`))
         .catch((error) => message.channel.send(`Error: ${error}`));
     } else {
-      message.reply("You do not have permissions to use this command");
+      message.reply(`you do not have permissions to use this command!`);
     }
   },
 };

@@ -1,5 +1,7 @@
+const { MessageManager } = require("discord.js");
+
 module.exports = {
-  name: "avatar",
+  name: "zavatar",
   usage: "<user>",
   description: "Get user avatar",
   async execute(message) {

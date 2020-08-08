@@ -30,7 +30,7 @@ module.exports = {
       }
       message.channel.send(`Command \`${command.name}\` was reloaded!`);
     } else {
-      message.reply("You do not have permissions to use this command");
+      message.reply(`you do not have permissions to use this command!`);
     }
   },
 };
