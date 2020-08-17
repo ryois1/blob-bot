@@ -1,7 +1,7 @@
 module.exports = {
-  name: 'ban',
-  usage: '<user>',
-  description: 'Ban a user',
+  name: "ban",
+  usage: "<user>",
+  description: "Ban a user",
   execute(message, args) {
     if (!args.length) {
       return message.reply(`you didn't mention a user to ban!`);

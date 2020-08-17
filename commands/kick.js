@@ -1,7 +1,7 @@
 module.exports = {
-  name: 'kick',
-  usage: '<user>',
-  description: 'Kick a member',
+  name: "kick",
+  usage: "<user>",
+  description: "Kick a member",
   async execute(message, args) {
     if (!args.length) {
       return message.reply(`you didn't mention a user to kick!`);
