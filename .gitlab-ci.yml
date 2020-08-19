@@ -3,4 +3,3 @@ before_script:
 build_image:
     script:
       - docker build -t blob-bot .
-      - docker run blob-bot
