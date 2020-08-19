@@ -26,7 +26,6 @@ module.exports = {
       .setAuthor(repo.owner.name, repo.owner.avatar, repo.owner.url)
       .addFields(
         { name: "Description", value: `${repo.description}` },
-        { name: "\u200B", value: "\u200B" },
         { name: "Primary Language", value: `${repo.language}`, inline: true },
         { name: "Watchers", value: `${repo.watchers}`, inline: true },
         { name: "Forks", value: `${repo.forks}`, inline: true }
