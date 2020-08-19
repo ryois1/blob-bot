@@ -7,19 +7,30 @@ module.exports = {
     const octokitUser = new Octokit();
     const Discord = require("discord.js");
     var repo;
-    await octokitRepo.request("GET /search/repositories", {
+    async function getRepo(args){
+      await octokitRepo.request("GET /search/repositories", {
         q: `${args}`,
         per_page: `1`,
-      }).then(({ data }) => {
+    }).then(({data}) => {
+      if (data.items[0] == undefined){
+          message.reply(`I could not find a repository with that name.`);
+          return false;
+      }else{
         repo = {name: data.items[0].full_name, url: data.items[0].html_url, description: data.items[0].description, language: data.items[0].language, forks: data.items[0].forks_count, watchers: data.items[0].watchers_count, owner: {avatar: data.items[0].owner.avatar_url, name: data.items[0].owner.login}};
-      });
-    await octokitUser.request("GET /search/users", {
+        return true;
+      }
+    });
+    }
+    async function getUser(repo){
+      await octokitUser.request("GET /search/users", {
         q: `${repo.owner.name}`,
         per_page: `1`,
       }).then(({ data }) => {
         repo.owner.url = data.items[0].html_url;
       });
-    const GithubEmbed = new Discord.MessageEmbed()
+    }
+    async function sendResult(repo, message){
+      const GithubEmbed = new Discord.MessageEmbed()
       .setColor("#0099ff")
       .setTitle(repo.name)
       .setURL(repo.url)
@@ -35,6 +46,11 @@ module.exports = {
         `${repo.name} on GitHub`,
         "https://blob.rocks/GitHub-Mark-Light-64px.png"
       );
-    message.channel.send(GithubEmbed);
+      message.channel.send(GithubEmbed);
+    }
+    if(getRepo(args)){
+      getUser(repo);
+      sendResult(repo, message);
+    }
   },
 };
