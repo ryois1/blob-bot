@@ -1,7 +1,4 @@
 test:
-  stage: lint
-  before_script:
-    - docker info
   script:
     - npm i eslint
     - npm i
