@@ -14,7 +14,7 @@ build:
     before_script:
         - docker info
     script:
-        - docker build -t blob-bot .
+        - docker build -t ryois/blob-bot .
 push:
     stage: push
     needs: 
