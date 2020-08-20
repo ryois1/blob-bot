@@ -1,16 +1,26 @@
 stages:
     - check
     - build
+    - push
 lint:
-  stage: check
-  script:
-    - npm i
-    - node_modules/eslint/bin/eslint.js .
+    stage: check
+    script:
+        - npm i
+        - node_modules/eslint/bin/eslint.js .
 build:
-  stage: build
-  needs: 
-    - lint
-  before_script:
-    - docker info
-  script:
-    - docker build -t blob-bot .
+    stage: build
+    needs: 
+        - lint
+    before_script:
+        - docker info
+    script:
+        - docker build -t blob-bot .
+push:
+    stage: build
+    needs: 
+        - lint
+        - build
+    before_script:
+        - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+    script:
+        - docker push "$CI_REGISTRY_IMAGE"
