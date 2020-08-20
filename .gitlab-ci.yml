@@ -22,7 +22,7 @@ run_container:
         - eslint
         - build_container
     script:
-        - docker run ryois/blob-bot --env TOKEN=$TOKEN --env PREFIX=$PREFIX
+        - docker run --env TOKEN=$TOKEN --env PREFIX=$PREFIX ryois/blob-bot 
 push_dockerhub:
     stage: push
     needs: 
