@@ -16,7 +16,7 @@ build:
     script:
         - docker build -t blob-bot .
 push:
-    stage: build
+    stage: push
     needs: 
         - lint
         - build
