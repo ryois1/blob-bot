@@ -1,8 +1,13 @@
-test:
+stages:
+    - check
+    - build
+lint:
+  stage: check
   script:
     - npm i
     - node_modules/eslint/bin/eslint.js .
 build:
+  stage: build
   needs: 
     - test
   before_script:
