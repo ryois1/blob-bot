@@ -9,7 +9,7 @@ lint:
 build:
   stage: build
   needs: 
-    - test
+    - lint
   before_script:
     - docker info
   script:
