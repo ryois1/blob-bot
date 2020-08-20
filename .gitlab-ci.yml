@@ -1,6 +1,5 @@
 test:
   script:
-    - npm i eslint
     - npm i
     - node_modules/eslint/bin/eslint.js .
 build:
