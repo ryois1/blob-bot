@@ -3,6 +3,8 @@ test:
     - npm i
     - node_modules/eslint/bin/eslint.js .
 build:
+  needs: 
+    - test
   before_script:
     - docker info
   script:
