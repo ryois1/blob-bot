@@ -1,4 +1,4 @@
-eslint:
+test:
   stage: lint
   before_script:
     - docker info
@@ -6,7 +6,7 @@ eslint:
     - npm i eslint
     - npm i
     - node_modules/eslint/bin/eslint.js .
-docker:
+build:
   before_script:
     - docker info
   script:
