@@ -1,26 +1,13 @@
-default:
+eslint:
+  stage: lint
   before_script:
-    - echo Starting
-stages:
-  - lint
-  - build
-
-lint: 
-    image: node
-    stage:
-     - lint
-    eslint:
-     stage: lint
-     script:
-        - npm i eslint
-        - npm i
-        - node_modules/eslint/bin/eslint.js .
-build_image:
-    stage:
-     - build
-    eslint:
-     stage: lint
-     before_script:
-        - docker info
-     script:
-        - docker build -t blob-bot .
+    - docker info
+  script:
+    - npm i eslint
+    - npm i
+    - node_modules/eslint/bin/eslint.js .
+docker:
+  before_script:
+    - docker info
+  script:
+    - docker build -t blob-bot .
