@@ -1,5 +1,23 @@
-before_script:
-    - docker info
+stages:
+  - lint
+  - build
+
+lint: 
+    image: node
+    stage:
+     - lint
+    eslint:
+     stage: lint
+     script:
+        - npm i eslint
+        - npm i
+        - node_modules/eslint/bin/eslint.js .
 build_image:
-    script:
-      - docker build -t blob-bot .
+    stage:
+     - build
+    eslint:
+     stage: lint
+     before_script:
+        - docker info
+     script:
+        - docker build -t blob-bot .
