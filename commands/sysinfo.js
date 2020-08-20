@@ -29,7 +29,7 @@ module.exports = {
         uptime: os.uptime(),
       };
     }
-    sysinfo = getSystemInfo();
+    var sysinfo = getSystemInfo();
     var uptime = (sysinfo.uptime + '').toHHMMSS();
     message.channel.send(
       `CPU Model: ${sysinfo.numCores} x ${

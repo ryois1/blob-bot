@@ -1,7 +1,7 @@
 module.exports = {
   name: "github",
   description: "github",
-  async execute(message, args, client, token) {
+  async execute(message, args) {
     const { Octokit } = require("@octokit/rest");
     const octokitRepo = new Octokit();
     const octokitUser = new Octokit();
