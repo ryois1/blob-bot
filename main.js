@@ -5,7 +5,10 @@ const token = process.env.TOKEN;
 const gitlab = process.env.GITLAB;
 const client = new Discord.Client();
 client.commands = new Discord.Collection();
-
+if(gitlab){
+  console.log("Success!");
+  process.exit();
+}
 const commandFiles = fs
   .readdirSync("./commands")
   .filter((file) => file.endsWith(".js"));
@@ -42,7 +45,4 @@ client.on("message", (message) => {
 client.login(token);
 client.once('ready', () => {
   console.log('Started blob bot!');
-  if(gitlab){
-    process.exit();
-  }
 });
