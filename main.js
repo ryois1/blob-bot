@@ -1,14 +1,7 @@
 const fs = require("fs");
 const Discord = require("discord.js");
-const configPath = './private/config.json'
-try {
-  if (fs.existsSync(configPath)) {
-    var {prefix, token} = require('./private/config.json');
-  }
-}catch(err) {
-  var prefix = process.env.PREFIX;
-  var token = process.env.TOKEN;
-}
+const prefix = process.env.PREFIX;
+const token = process.env.TOKEN;
 const client = new Discord.Client();
 client.commands = new Discord.Collection();
 
