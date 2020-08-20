@@ -1,6 +1,14 @@
 const fs = require("fs");
 const Discord = require("discord.js");
-const { prefix, token } = require("./private/config.json");
+const configPath = './private/config.json'
+try {
+  if (fs.existsSync(configPath)) {
+    var {prefix, token} = require('./private/config.json');
+  }
+}catch(err) {
+  var prefix = process.env.PREFIX;
+  var token = process.env.TOKEN;
+}
 const client = new Discord.Client();
 client.commands = new Discord.Collection();
 
@@ -38,3 +46,6 @@ client.on("message", (message) => {
   }
 });
 client.login(token);
+client.once('ready', () => {
+	console.log('Started blob bot!');
+});
