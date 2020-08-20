@@ -2,6 +2,7 @@ const fs = require("fs");
 const Discord = require("discord.js");
 const prefix = process.env.PREFIX;
 const token = process.env.TOKEN;
+const gitlab = process.env.GITLAB;
 const client = new Discord.Client();
 client.commands = new Discord.Collection();
 
@@ -40,5 +41,8 @@ client.on("message", (message) => {
 });
 client.login(token);
 client.once('ready', () => {
-	console.log('Started blob bot!');
+  console.log('Started blob bot!');
+  if(gitlab){
+    process.exit();
+  }
 });
