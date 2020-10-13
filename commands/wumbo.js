@@ -1,5 +1,5 @@
 module.exports = {
-	name: 'jumbo',
+	name: 'wumbo',
 	usage: '<emoji>',
 	description: 'Wumbo an emoji!',
 	async execute(message, args) {
@@ -14,16 +14,16 @@ module.exports = {
 			args.shift();
 			const messageSend = args.join(' ');
 			https.get(
-				`https://cdn.discordapp.com/emojis/${emojiID}.gif?v=1`,
+				`https://cdn.discordapp.com/emojis/${emojiID}.png?v=1`,
 				function(res) {
 					if (res.statusCode == 200) {
 						message.channel.send(`${messageSend}`, {
-							files: [`https://cdn.discordapp.com/emojis/${emojiID}.gif?v=1`],
+							files: [`https://cdn.discordapp.com/emojis/${emojiID}.png?v=1`],
 						});
 					}
 					else {
 						message.reply(
-							'oof unable to get this emoji, is it a png? try using !wumbo',
+							'oof unable to get this emoji, is it a gif? try using !jumbo',
 						);
 					}
 				});

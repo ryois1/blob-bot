@@ -1,8 +1,8 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 const fs = require('fs');
 const Discord = require('discord.js');
-const prefix = "!";
-const token = "NzM3NDgyNTc5NjMyMTkzNTc2.Xx-ALA.tMyUU62mn53iX9-atk5y3dMq8DY";
+const prefix = '!';
+const token = 'NzM3NDgyNTc5NjMyMTkzNTc2.Xx-ALA.tMyUU62mn53iX9-atk5y3dMq8DY';
 const gitlab = process.env.GITLAB;
 const client = new Discord.Client();
 client.commands = new Discord.Collection();

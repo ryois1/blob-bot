@@ -10,6 +10,7 @@
         "@octokit/rest": "^18.0.3",
         "discord.js": "^12.2.0",
         "https": "^1.0.0",
+        "moment": "^2.29.1",
         "pm2": "^4.4.0"
     },
     "scripts": {
