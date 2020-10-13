@@ -9,6 +9,7 @@
     "dependencies": {
         "@octokit/rest": "^18.0.3",
         "discord.js": "^12.2.0",
+        "discordjs-logger": "^1.9.42",
         "https": "^1.0.0",
         "moment": "^2.29.1",
         "pm2": "^4.4.0"
