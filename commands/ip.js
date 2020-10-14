@@ -2,6 +2,6 @@ module.exports = {
 	name: 'ip',
 	description: 'Send Minecraft IPs',
 	async execute(message) {
-		message.channel.send('creative-mc.blob.rocks|survival-mc.blob.rocks|mc.asspoop.com');
+		message.channel.send('**Creative Minecraft** (1.12.2) Custom Mod Pack creative-mc.blob.rocks\n**Survival Minecraft** (1.12.2) FTB Revelation survival-mc.blob.rocks\n**Vanilla Survival Minecraft** (1.16) mc.asspoop.com');
 	},
 };
