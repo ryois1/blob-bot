@@ -1,5 +1,6 @@
 module.exports = {
 	name: 'namecolor',
+	aliases: ['namecolour'],
 	description: 'Specify a hex color for your name!',
 	execute(message, args) {
 		const guild = message.guild;
