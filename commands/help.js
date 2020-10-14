@@ -5,7 +5,7 @@ module.exports = {
 	usage: '<command name>',
 	cooldown: 5,
 	execute(message, args) {
-		const { prefix } = '!';
+		const { prefix } = '!	';
 		const data = [];
 		const { commands } = message.client;
 		if (!args.length) {
@@ -16,7 +16,7 @@ module.exports = {
 					.join('\n'),
 			);
 			data.push(
-				`\nYou can send \`!help [command name]\` to get info on a specific command!`,
+				'\nYou can send `!help [command name]` to get info on a specific command!',
 			);
 			return message.channel.send(data, { split: true }).catch((error) => {
 				console.error('There was an error showing my commands\n', error);
