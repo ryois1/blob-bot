@@ -17,7 +17,7 @@
     "scripts": {
         "dev": "node main.js",
         "start": "node main.js",
-        "test": "echo \"Sucess\" && exit 1"
+        "test": "echo \"Sucess\" && exit 0"
     },
     "devDependencies": {
         "eslint": "^7.7.0"
