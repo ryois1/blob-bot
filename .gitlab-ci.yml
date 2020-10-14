@@ -2,7 +2,6 @@ stages:
     - check
     - build
     - test
-    - push
 eslint:
     stage: check
     script:
@@ -23,13 +22,3 @@ run_container:
         - build_container
     script:
         - docker run -e CI=true  ryois/blob-bot npm run test
-push_dockerhub:
-    stage: push
-    needs: 
-        - eslint
-        - build_container
-        - run_container
-    before_script:
-        - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
-    script:
-        - docker push "$CI_REGISTRY_IMAGE"
