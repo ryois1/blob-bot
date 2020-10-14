@@ -22,7 +22,7 @@ run_container:
         - eslint
         - build_container
     script:
-        - docker run --env TOKEN=$TOKEN --env PREFIX=$PREFIX --env GITLAB=$GITLAB ryois/blob-bot 
+        - docker run -e CI=true  ryois/blob-bot npm run test
 push_dockerhub:
     stage: push
     needs: 
