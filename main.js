@@ -52,4 +52,8 @@ client.on('message', (message) => {
 client.login(token);
 client.once('ready', () => {
 	console.log('Started blob bot!');
+	console.log(`In ${client.guilds.cache.size} servers`);
+	setInterval(function() {client.user.setActivity(`over ${client.guilds.cache.size} servers`, { type: 'WATCHING' });}, 30000);
+
+
 });
