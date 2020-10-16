@@ -1,5 +1,6 @@
 module.exports = {
 	name: 'ping',
+	usage: '[Command only]',
 	description: 'Ping!',
 	async execute(message) {
 		const m = await message.channel.send('Ping?');

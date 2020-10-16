@@ -1,6 +1,6 @@
 module.exports = {
 	name: 'jumbo',
-	usage: '<emoji>',
+	usage: '<Animated Emoji>',
 	description: 'Wumbo an emoji!',
 	async execute(message, args) {
 		if (!args.length) {

@@ -1,5 +1,6 @@
 module.exports = {
 	name: 'restart',
+	usage: '[Command only]',
 	aliases: ['reboot'],
 	description: 'Restarts the bot',
 	async execute(message, args, client, token) {

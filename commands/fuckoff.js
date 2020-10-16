@@ -1,5 +1,6 @@
 module.exports = {
 	name: 'fuckoff',
+	usage: '[Command only]',
 	aliases: ['foaas'],
 	description: 'FOaaS',
 	async execute(message) {

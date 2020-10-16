@@ -1,5 +1,6 @@
 module.exports = {
 	name: 'eveart',
+	usage: '[Command only]',
 	description: 'Random Eve art!',
 	async execute(message) {
 		const fs = require('fs');

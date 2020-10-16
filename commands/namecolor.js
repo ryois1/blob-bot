@@ -1,5 +1,6 @@
 module.exports = {
 	name: 'namecolor',
+	usage: '<hex color>',
 	aliases: ['namecolour'],
 	description: 'Specify a hex color for your name!',
 	execute(message, args) {

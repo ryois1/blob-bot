@@ -1,5 +1,6 @@
 module.exports = {
 	name: 'sysinfo',
+	usage: '[Command only]',
 	description: 'Get the bot\'s system info',
 	async execute(message) {
 		const os = require('os');

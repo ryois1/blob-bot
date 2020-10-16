@@ -1,5 +1,7 @@
 module.exports = {
 	name: 'temps',
+	aliases: ['temp'],
+	usage: '<c/f> <temp to convert>',
 	description: 'Celsius to Fahrenheit and vice versa',
 	async execute(message, args) {
 		const unitFrom = args[0];

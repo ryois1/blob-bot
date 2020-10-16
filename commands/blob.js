@@ -1,5 +1,6 @@
 module.exports = {
 	name: 'blob',
+	usage: '[Command only]',
 	description: 'Random blob!',
 	async execute(message) {
 		const fs = require('fs');

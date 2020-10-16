@@ -1,6 +1,7 @@
 /* eslint-disable no-irregular-whitespace */
 module.exports = {
 	name: 'sus',
+	usage: '[Command only]',
 	description: 'Yellow sus',
 	async execute(message) {
 		const sus = message.guild.members.cache.random().user;

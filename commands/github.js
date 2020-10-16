@@ -1,5 +1,6 @@
 module.exports = {
 	name: 'github',
+	usage: '<search term>',
 	description: 'github',
 	async execute(message, args) {
 		const { Octokit } = require('@octokit/rest');
