@@ -1,11 +1,11 @@
 {
     "name": "blobbot",
-    "version": "1.2.0",
+    "version": "1.9.3",
     "description": "A Discord bot!",
     "main": "main.js",
     "keywords": [],
     "author": "Ryois",
-    "license": "ISC",
+    "license": "GNU GPLv3",
     "dependencies": {
         "@octokit/rest": "^18.0.3",
         "discord.js": "^12.2.0",
