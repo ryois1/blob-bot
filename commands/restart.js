@@ -1,5 +1,6 @@
 module.exports = {
 	name: 'restart',
+	cooldown: 2,
 	usage: '[Command only]',
 	aliases: ['reboot'],
 	description: 'Restarts the bot',

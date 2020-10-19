@@ -1,5 +1,6 @@
 module.exports = {
 	name: 'fuckoff',
+	cooldown: 3,
 	usage: '[Command only]',
 	aliases: ['foaas'],
 	description: 'FOaaS',

@@ -1,5 +1,6 @@
 module.exports = {
 	name: 'setavatar',
+	cooldown: 10,
 	usage: '<image>',
 	description: 'Set the bot\'s avatar',
 	async execute(message, args, client) {

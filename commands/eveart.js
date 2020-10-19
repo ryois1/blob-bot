@@ -1,5 +1,6 @@
 module.exports = {
 	name: 'eveart',
+	cooldown: 3,
 	usage: '[Command only]',
 	description: 'Random Eve art!',
 	async execute(message) {

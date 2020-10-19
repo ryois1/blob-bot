@@ -1,6 +1,7 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 module.exports = {
 	name: 'reload',
+	cooldown: 2,
 	usage: '<command>',
 	description: 'Reloads a command',
 	execute(message, args) {

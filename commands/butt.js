@@ -1,6 +1,7 @@
 module.exports = {
 	name: 'butt',
 	usage: '[Command only]',
+	cooldown: 3,
 	aliases: ['butts'],
 	description: 'Butt',
 	async execute(message) {

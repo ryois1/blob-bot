@@ -1,5 +1,6 @@
 module.exports = {
 	name: 'ip',
+	cooldown: 5,
 	usage: '[Command only]',
 	description: 'Send Minecraft IPs',
 	async execute(message) {

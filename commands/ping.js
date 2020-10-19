@@ -1,5 +1,6 @@
 module.exports = {
 	name: 'ping',
+	cooldown: 3,
 	usage: '[Command only]',
 	description: 'Ping!',
 	async execute(message) {

@@ -1,5 +1,6 @@
 module.exports = {
 	name: 'kick',
+	cooldown: 1,
 	usage: '<user>',
 	description: 'Kick a member',
 	async execute(message, args) {

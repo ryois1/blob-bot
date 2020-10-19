@@ -1,5 +1,6 @@
 module.exports = {
 	name: 'sysinfo',
+	cooldown: 10,
 	usage: '[Command only]',
 	description: 'Get the bot\'s system info',
 	async execute(message) {

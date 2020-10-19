@@ -1,6 +1,7 @@
 module.exports = {
 	name: 'userinfo',
 	usage: '<target>',
+	cooldown: 3,
 	description: 'Get the info of a target',
 	async execute(message) {
 		const moment = require('moment');

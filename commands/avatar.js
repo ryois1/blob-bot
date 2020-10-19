@@ -1,6 +1,7 @@
 module.exports = {
 	name: 'avatar',
 	usage: '<user>',
+	cooldown: 3,
 	description: 'Get user avatar',
 	async execute(message) {
 		if (!message.mentions.users.size) {

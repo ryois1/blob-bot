@@ -1,5 +1,6 @@
 module.exports = {
 	name: 'github',
+	cooldown: 3,
 	usage: '<search term>',
 	description: 'github',
 	async execute(message, args) {
