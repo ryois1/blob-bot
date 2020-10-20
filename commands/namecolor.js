@@ -5,6 +5,9 @@ module.exports = {
 	aliases: ['namecolour'],
 	description: 'Specify a hex color for your name!',
 	execute(message, args) {
+		if (!args.length) {
+			return message.reply('you didn\'t give me a hex color!');
+		}
 		const guild = message.guild;
 		const roleName = `${message.author.id}`;
 		const role = message.guild.roles.cache.find(x => x.name == roleName);

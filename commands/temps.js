@@ -5,6 +5,9 @@ module.exports = {
 	usage: '<c/f> <temp to convert>',
 	description: 'Celsius to Fahrenheit and vice versa',
 	async execute(message, args) {
+		if (!args.length) {
+			return message.reply('you didn\'t provide any arguments!');
+		}
 		const unitFrom = args[0];
 		const from = args[1];
 		if(unitFrom == 'c') {

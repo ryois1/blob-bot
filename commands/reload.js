@@ -7,8 +7,8 @@ module.exports = {
 	execute(message, args) {
 		if (message.member.hasPermission('ADMINISTRATOR')) {
 			if (!args.length) {
-				return message.channel.send(
-					`You didn't pass any command to reload, ${message.author}!`,
+				return message.reply(
+					'you didn\'t pass any command to reload!',
 				);
 			}
 			const commandName = args[0].toLowerCase();
@@ -18,8 +18,8 @@ module.exports = {
         	(cmd) => cmd.aliases && cmd.aliases.includes(commandName),
         );
 			if (!command) {
-				return message.channel.send(
-					`There is no command with name or alias \`${commandName}\`, ${message.author}!`,
+				return message.reply(
+					`there is no command with name or alias \`${commandName}\`!`,
 				);
 			}
 			delete require.cache[require.resolve(`./${command.name}.js`)];
@@ -29,11 +29,11 @@ module.exports = {
 			}
 			catch (error) {
 				console.log(error);
-				message.channel.send(
-					`There was an error while reloading a command \`${command.name}\`:\n\`${error.message}\``,
+				message.reply(
+					`there was an error while reloading a command \`${command.name}\`:\n\`${error.message}\``,
 				);
 			}
-			message.channel.send(`Command \`${command.name}\` was reloaded!`);
+			message.reply(`Command \`${command.name}\` was reloaded!`);
 		}
 		else {
 			message.reply('you do not have permissions to use this command!');

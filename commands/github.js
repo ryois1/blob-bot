@@ -4,6 +4,9 @@ module.exports = {
 	usage: '<search term>',
 	description: 'github',
 	async execute(message, args) {
+		if (!args.length) {
+			return message.reply('you didn\'t give me a search term');
+		}
 		const { Octokit } = require('@octokit/rest');
 		const octokitRepo = new Octokit();
 		const octokitUser = new Octokit();

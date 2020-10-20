@@ -3,7 +3,10 @@ module.exports = {
 	cooldown: 1,
 	usage: '<user>',
 	description: 'hack somebody',
-	async execute(message) {
+	async execute(message, args) {
+		if (!args.length) {
+			return message.reply('you didn\'t name anyone for me to hack!');
+		}
 		await message.channel.send('Hacking queeba');
 	},
 };
