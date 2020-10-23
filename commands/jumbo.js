@@ -1,6 +1,6 @@
 module.exports = {
 	name: 'jumbo',
-	cooldown: 3,
+	cooldown: 0.5,
 	usage: '<Animated Emoji>',
 	description: 'Wumbo an emoji!',
 	async execute(message, args) {

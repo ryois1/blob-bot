@@ -3,6 +3,7 @@ module.exports = {
 	usage: '<user>',
 	cooldown: 1,
 	description: 'Ban a user',
+	guildOnly: true,
 	execute(message, args) {
 		if (!args.length) {
 			return message.reply('you didn\'t mention a user to ban!');

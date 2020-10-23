@@ -1,7 +1,7 @@
 /* eslint-disable no-irregular-whitespace */
 module.exports = {
 	name: 'sus',
-	cooldown: 3,
+	cooldown: 0.5,
 	usage: '[Command only]',
 	description: 'Yellow sus',
 	async execute(message) {

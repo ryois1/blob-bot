@@ -3,6 +3,7 @@ module.exports = {
 	cooldown: 1,
 	usage: '<user>',
 	description: 'Kick a member',
+	guildOnly: true,
 	async execute(message, args) {
 		if (!args.length) {
 			return message.reply('you didn\'t mention a user to kick!');
