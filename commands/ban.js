@@ -6,7 +6,10 @@ module.exports = {
 	guildOnly: true,
 	execute(message, args) {
 		if (!args.length) {
-			return message.reply('you didn\'t mention a user to ban!');
+			return message.reply('you didn\'t mention a user to ban.') .then(msg => {
+				msg.delete({ timeout: 1500 });
+				message.delete({ timeout: 1500 });
+			});
 		}
 		if (message.member.hasPermission('BAN_MEMBERS')) {
 			if (message.mentions.members.first()) {
@@ -39,7 +42,10 @@ module.exports = {
 			}
 		}
 		else {
-			message.reply('you do not have permissions to use this command!');
+			message.reply('you do not have permission to use this command.') .then(msg => {
+				msg.delete({ timeout: 1500 });
+				message.delete({ timeout: 1500 });
+			});
 		}
 	},
 };

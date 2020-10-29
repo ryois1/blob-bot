@@ -29,14 +29,21 @@ module.exports = {
 			}
 			catch (error) {
 				console.log(error);
-				message.reply(
-					`there was an error while reloading a command \`${command.name}\`:\n\`${error.message}\``,
-				);
+				message.reply(`there was an error while reloading a command \`${command.name}\`:\n\`${error.message}\``) .then(msg => {
+					msg.delete({ timeout: 1500 });
+					message.delete({ timeout: 1500 });
+				});
 			}
-			message.reply(`Command \`${command.name}\` was reloaded!`);
+			message.reply(`Command \`${command.name}\` was reloaded!`) .then(msg => {
+				msg.delete({ timeout: 1500 });
+				message.delete({ timeout: 1500 });
+			});
 		}
 		else {
-			message.reply('you do not have permissions to use this command!');
+			message.reply('you do not have permission to use this command.') .then(msg => {
+				msg.delete({ timeout: 1500 });
+				message.delete({ timeout: 1500 });
+			});
 		}
 	},
 };

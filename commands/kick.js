@@ -6,7 +6,10 @@ module.exports = {
 	guildOnly: true,
 	async execute(message, args) {
 		if (!args.length) {
-			return message.reply('you didn\'t mention a user to kick!');
+			return message.reply('you didn\'t mention anyone to kick.') .then(msg => {
+				msg.delete({ timeout: 1500 });
+				message.delete({ timeout: 1500 });
+			});
 		}
 		if (message.member.hasPermission('KICK_MEMBERS')) {
 			if (message.mentions.members.first()) {
@@ -40,8 +43,8 @@ module.exports = {
 		}
 		else {
 			message.reply('you do not have permission to use this command.') .then(msg => {
-				msg.delete({ timeout: 500 });
-				message.delete({ timeout: 500 });
+				msg.delete({ timeout: 1500 });
+				message.delete({ timeout: 1500 });
 			});
 		}
 	},
