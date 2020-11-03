@@ -41,7 +41,8 @@ module.exports = {
 			.addField('Emoji Count', `This server has ${message.guild.emojis.cache.size} emojis`, true)
 			.addField('Roles Count', `This server has ${message.guild.roles.cache.size} roles`, true)
 			.addField('Verification Level', verifLevels[message.guild.verificationLevel], true)
-			.addField('Creation Date', `${message.channel.guild.createdAt.toUTCString().substr(0, 16)} (${checkDays(message.channel.guild.createdAt)})`, true);
+			.addField('Creation Date', `${message.channel.guild.createdAt.toUTCString().substr(0, 16)} (${checkDays(message.channel.guild.createdAt)})`, true)
+			.addField('ID', message.guild.id, true);
 		message.channel.send(embed);
 	},
 };

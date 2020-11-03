@@ -16,7 +16,8 @@ module.exports = {
 			q: `${args}`,
 			per_page: '1',
 		}).then(({ data }) => {
-			repo = { name: data.items[0].full_name, url: data.items[0].html_url, description: data.items[0].description, language: data.items[0].language, forks: data.items[0].forks_count, watchers: data.items[0].watchers_count, owner: { avatar: data.items[0].owner.avatar_url, name: data.items[0].owner.login } };
+			console.log(data);
+			repo = { watchers: data.items[0].watchers_count, last_updated: data.items[0].pushed_at, name: data.items[0].full_name, url: data.items[0].html_url, description: data.items[0].description, language: data.items[0].language, forks: data.items[0].forks_count, stars: data.items[0].stargazers_count, owner: { avatar: data.items[0].owner.avatar_url, name: data.items[0].owner.login } };
 		});
 		await octokitUser.request('GET /search/users', {
 			q: `${repo.owner.name}`,
@@ -33,8 +34,10 @@ module.exports = {
 				{ name: 'Description', value: `${repo.description}` },
 				{ name: '\u200B', value: '\u200B' },
 				{ name: 'Primary Language', value: `${repo.language}`, inline: true },
+				{ name: 'Stars', value: `${repo.stars}`, inline: true },
 				{ name: 'Watchers', value: `${repo.watchers}`, inline: true },
 				{ name: 'Forks', value: `${repo.forks}`, inline: true },
+				{ name: 'Last Updated', value: `${repo.last_updated}`, inline: true },
 			)
 			.setTimestamp()
 			.setFooter(
