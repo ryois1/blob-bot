@@ -3,6 +3,7 @@ module.exports = {
 	usage: '[Command only]',
 	cooldown: 3,
 	description: 'Random blob!',
+	guildOnly: false,
 	async execute(message) {
 		const fs = require('fs');
 		const files = fs.readdirSync('./content/blobs/');

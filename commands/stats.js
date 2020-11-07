@@ -3,6 +3,7 @@ module.exports = {
 	cooldown: 3,
 	usage: '[Command only]',
 	description: 'Get bot stats',
+	guildOnly: false,
 	async execute(message, args, client) {
 		const os = require('os');
 		function getSystemInfo() {

@@ -3,6 +3,7 @@ module.exports = {
 	cooldown: 3,
 	usage: '<search term>',
 	description: 'github',
+	guildOnly: false,
 	async execute(message, args) {
 		if (!args.length) {
 			return message.reply('you didn\'t give me a search term');

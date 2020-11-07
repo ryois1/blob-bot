@@ -3,6 +3,7 @@ module.exports = {
 	cooldown: 0.5,
 	usage: '<Emoji>',
 	description: 'Wumbo an emoji!',
+	guildOnly: false,
 	async execute(message, args) {
 		if (!args.length) {
 			return message.reply('you didn\'t provide an emoji to jumbo!');

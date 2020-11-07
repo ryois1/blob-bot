@@ -3,6 +3,7 @@ module.exports = {
 	cooldown: 3,
 	usage: '[Command only]',
 	description: 'Random Eve art!',
+	guildOnly: false,
 	async execute(message) {
 		const fs = require('fs');
 		const files = fs.readdirSync('./content/evedrawings/');

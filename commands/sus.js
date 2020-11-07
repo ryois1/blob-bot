@@ -5,6 +5,7 @@ module.exports = {
 	cooldown: 0.5,
 	usage: '[Command only]',
 	description: 'Yellow sus',
+	guildOnly: true,
 	async execute(message) {
 		const { messages, places, colors } = JSON.parse(fs.readFileSync('./content/sus_messages.json'));
 		const user_sus = message.guild.members.cache.random();

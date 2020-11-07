@@ -4,6 +4,7 @@ module.exports = {
 	aliases: ['commands'],
 	usage: '<command name>',
 	cooldown: 1,
+	guildOnly: false,
 	execute(message, args) {
 		const prefix = '!';
 		const data = [];

@@ -3,6 +3,7 @@ module.exports = {
 	cooldown: 10,
 	usage: '<image>',
 	description: 'Set the bot\'s avatar',
+	guildOnly: false,
 	async execute(message, args, client) {
 		if (!args.length) {
 			return message.reply('you didn\'t provide an image URL!');

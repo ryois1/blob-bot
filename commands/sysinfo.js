@@ -3,9 +3,9 @@ module.exports = {
 	cooldown: 10,
 	usage: '[Command only]',
 	description: 'Get the bot\'s system info',
+	guildOnly: false,
 	async execute(message) {
 		const os = require('os');
-
 		String.prototype.toHHMMSS = function() {
 			let seconds = parseInt(this, 10);
 			seconds = Number(seconds);
