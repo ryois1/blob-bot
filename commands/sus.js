@@ -28,7 +28,7 @@ module.exports = {
 
 		if (hooks_len == 0) {
 			await channel.createWebhook('sus', {
-				avatar: 'https://cdn.discordapp.com/attachments/765292850219843645/774848748861390888/5fa5425f96cc0.png',
+				avatar: 'https://cdn.discordapp.com/attachments/350982862901870592/774850240657621012/5fa5425f96cc0.png',
 				reason: 'sus'
 			});
 		}
