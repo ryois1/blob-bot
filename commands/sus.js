@@ -9,6 +9,7 @@ module.exports = {
 		const { channel } = message;
 		const { messages, places, colors } = JSON.parse(fs.readFileSync('./content/sus_messages.json'));
 
+		const user_accused = message.guild.members.cache.random().user;
 		const user_sus = message.guild.members.cache.random().user;
 
 		const user_killed = message.guild.members.cache.random().user;
@@ -28,7 +29,7 @@ module.exports = {
 
 		if (hooks_len == 0) {
 			await channel.createWebhook('sus', {
-				avatar: 'https://cdn.discordapp.com/attachments/350982862901870592/774850240657621012/5fa5425f96cc0.png',
+				avatar: 'https://cdn.discordapp.com/attachments/765292850219843645/774848748861390888/5fa5425f96cc0.png',
 				reason: 'sus'
 			});
 		}
@@ -37,7 +38,7 @@ module.exports = {
 		const webhook = hooks.first();
 	
 		webhook.send(susmessage, {
-			username: `${message.author.member && message.author.member.displayName || message.author.username}`,
+			username: `${user_accused.member && user_accused.member.displayName || user_accused.username}`,
 			avatarURL: message.author.displayAvatarURL()
 		});
 	},
