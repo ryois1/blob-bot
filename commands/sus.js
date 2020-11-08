@@ -7,14 +7,12 @@ module.exports = {
 	description: 'Yellow sus',
 	guildOnly: true,
 	async execute(message) {
-		const { channel } = message;
 		const { messages, places, colors } = JSON.parse(fs.readFileSync('./content/sus_messages.json'));
 		const user_sus = message.guild.members.cache.random();
 		const user_killed = message.guild.members.cache.random();
 		const user_accused = message.guild.members.cache.random();
 		const place = places[Math.floor(Math.random() * places.length)];
 		const color = colors[Math.floor(Math.random() * colors.length)];
-
 		const susmessage = messages[Math.floor(Math.random() * messages.length)]
 			.replace('$user_sus', `**${user_sus.displayName}**`)
 			.replace('$user_killed', `**${user_killed.displayName}**`)
