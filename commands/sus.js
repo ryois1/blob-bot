@@ -17,6 +17,7 @@ module.exports = {
 		const susmessage = messages[Math.floor(Math.random() * messages.length)]
 			.replace('$user_sus', `**${user_sus.displayName}**`)
 			.replace('$user_killed', `**${user_killed.displayName}**`)
+			.replace('$user_accused', `**${user_accused.displayName}**`)
 			.replace('$place', `**${place}**`)
 			.replace('$color', `**${color}**`)
 		;

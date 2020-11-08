@@ -2,7 +2,7 @@
   "messages": [
     "$user_sus: I'm not the impostor, u really think my fat juicy ass could fit through the vent?",
     "$user_sus sus",
-    "$user_sus: idk that sounds kinda sus. list your tasks",
+    "idk that sounds kinda sus. list your tasks $color",
     "$user_sus: i was killing the impostor",
     "$user_sus: I was cleaning the vents",
     "I saw $user_sus vent",
@@ -10,7 +10,7 @@
     "$user_sus: I was doing lights",
     "$user_sus was faking their tasks",
     "Don't mistake me for $user_sus",
-    "$user_sus: Did anyone see $color last turn?",
+    "Did anyone see $color last turn?",
     "I was on cams and saw $user_sus vent",
     "I was on cams and saw $user_sus kill $user_killed near $place",
     "$user_sus was venting, i fucking saw him I swear",
@@ -23,7 +23,7 @@
     "Reactor",
     "Security",
     "Lower Engine",
-    "Eletricial",
+    "Electrical",
     "MedBay",
     "Storage",
     "Cafeteria",
@@ -31,7 +31,7 @@
     "Weapons",
     "O2",
     "Navigation",
-    "Sheilds",
+    "Shields",
     "Communications"
   ],
   "colors": [
