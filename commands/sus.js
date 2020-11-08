@@ -38,7 +38,7 @@ module.exports = {
 		const webhook = hooks.first();
 	
 		webhook.send(susmessage, {
-			username: `${user_accused.member && user_accused.member.displayName || user_accused.username}`,
+			username: `${user_accused.member.displayName}`,
 			avatarURL: message.author.displayAvatarURL()
 		});
 	},
