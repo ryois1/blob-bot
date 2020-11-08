@@ -34,7 +34,7 @@ module.exports = {
 
 		webhook.send(susmessage, {
 			username: `${user_accused.displayName}`,
-			avatarURL: user_accused.user.displayAvatarURL()
+			avatarURL: user_accused.user.displayAvatarURL(),
 		});
 	},
 };
