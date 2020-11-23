@@ -8,13 +8,14 @@ module.exports = {
 	guildOnly: true,
 	async execute(message) {
 		const { channel } = message;
-		const { messages, places, colors } = JSON.parse(fs.readFileSync('./content/sus_messages.json'));
+		const { messages, places, colors } = JSON.parse(fs.readFileSync('./content/sus.json'));
+		const message_id = Math.floor(Math.random() * messages.length);
 		const user_sus = message.guild.members.cache.random();
 		const user_killed = message.guild.members.cache.random();
 		const user_accused = message.guild.members.cache.random();
 		const place = places[Math.floor(Math.random() * places.length)];
 		const color = colors[Math.floor(Math.random() * colors.length)];
-		const susmessage = messages[Math.floor(Math.random() * messages.length)]
+		const sus_message = messages[message_id].content
 			.replace('$user_sus', `**${user_sus.displayName}**`)
 			.replace('$user_killed', `**${user_killed.displayName}**`)
 			.replace('$user_accused', `**${user_accused.displayName}**`)
@@ -32,10 +33,23 @@ module.exports = {
 
 		const hooks = await channel.fetchWebhooks();
 		const webhook = hooks.first();
-
-		webhook.send(susmessage, {
-			username: `${user_accused.displayName}`,
-			avatarURL: user_accused.user.displayAvatarURL(),
+		let webhook_username = null;
+		let webhook_avatar = null;
+		if(messages[message_id].is_game) {
+			webhook_username = 'Among Us';
+		}
+		else{
+			webhook_username = user_accused.displayName;
+		}
+		if(messages[message_id].is_game) {
+			webhook_avatar = 'https://cdn.discordapp.com/attachments/765300137635348510/780153548696453190/Among_Us.png';
+		}
+		else{
+			webhook_avatar = user_accused.user.displayAvatarURL();
+		}
+		webhook.send(sus_message, {
+			username: webhook_username,
+			avatarURL: webhook_avatar,
 		});
 	},
 };

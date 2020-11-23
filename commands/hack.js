@@ -8,6 +8,26 @@ module.exports = {
 		if (!args.length) {
 			return message.reply('you didn\'t name anyone for me to hack!');
 		}
-		await message.channel.send('Hacking queeba');
+		const hacking_message = await message.channel.send('Hacking queeba');
+		let loop_count = 0;
+		while (loop_count < 120) {
+			if (loop_count == 80) {
+				hacking_message.edit(
+					'Hacking queeba... 99% done.',
+				);
+			}
+			else{
+				hacking_message.edit(
+					`Hacking queeba... ${loop_count}% done.`,
+				);
+			}
+			loop_count += 20;
+			if (loop_count == 120) {
+				hacking_message.edit(
+					'Hacked queeba.',
+				);
+				break;
+			}
+		}
 	},
 };
