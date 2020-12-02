@@ -21,7 +21,7 @@ module.exports = {
 			.replace('$user_accused', `**${user_accused.displayName}**`)
 			.replace('$place', `**${place}**`)
 			.replace('$color', `**${color}**`)
-		;
+			;
 		const hooks_len = (await channel.fetchWebhooks()).size;
 
 		if (hooks_len == 0) {
@@ -35,21 +35,24 @@ module.exports = {
 		const webhook = hooks.first();
 		let webhook_username = null;
 		let webhook_avatar = null;
-		if(messages[message_id].is_game) {
+		if (messages[message_id].is_game) {
 			webhook_username = 'Among Us';
 		}
-		else{
+		else {
 			webhook_username = user_accused.displayName;
 		}
-		if(messages[message_id].is_game) {
+		if (messages[message_id].is_game) {
 			webhook_avatar = 'https://cdn.discordapp.com/attachments/765300137635348510/780153548696453190/Among_Us.png';
 		}
-		else{
+		else {
 			webhook_avatar = user_accused.user.displayAvatarURL();
 		}
 		webhook.send(sus_message, {
 			username: webhook_username,
 			avatarURL: webhook_avatar,
-		});
+		})
+			.then(
+				message.delete({ timeout: 100 }),
+			);
 	},
 };
