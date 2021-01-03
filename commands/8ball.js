@@ -1,3 +1,5 @@
+const eightball = require('8ball')();
+
 module.exports = {
 	name: '8ball',
 	usage: '[Command only]',
@@ -9,7 +11,6 @@ module.exports = {
 		if (!args.length) {
 			return message.reply('you didn\'t give me a question');
 		}
-		const eightball = require('8ball')();
 		message.reply(`*${args.splice(0).join(' ')}?* ... ${eightball}`);
 	},
 };
