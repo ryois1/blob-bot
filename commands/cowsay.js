@@ -9,7 +9,7 @@ module.exports = {
 	enabled: true,
 	async execute(message, args) {
 		let cowsayin = args.join(' ');
-		cowsayin = cowsayin.replace(/[^a-zA-Z0-9 ]/g, '');
+		cowsayin = cowsayin.replace(/[^a-zA-Z0-9,.! ]/g, '');
 		if(cowsayin.length > 0) {
 			const cowsayout = cowsay.say({ text: cowsayin });
 			message.channel.send(`\`\`\`${cowsayout}\`\`\``);
