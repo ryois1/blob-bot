@@ -4,6 +4,7 @@ module.exports = {
 	usage: '<image>',
 	description: 'Set the bot\'s avatar',
 	guildOnly: false,
+	enabled: true,
 	async execute(message, args, client) {
 		if (!args.length) {
 			return message.reply('you didn\'t provide an image URL!');

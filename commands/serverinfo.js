@@ -4,6 +4,7 @@ module.exports = {
 	cooldown: 3,
 	description: 'Get the info of the current server',
 	guildOnly: true,
+	enabled: true,
 	async execute(message) {
 		const Discord = require('discord.js');
 		function checkDays(date) {

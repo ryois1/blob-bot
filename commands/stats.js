@@ -4,6 +4,7 @@ module.exports = {
 	usage: '[Command only]',
 	description: 'Get bot stats',
 	guildOnly: false,
+	enabled: true,
 	async execute(message, args, client) {
 		const os = require('os');
 		function getSystemInfo() {

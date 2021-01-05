@@ -4,6 +4,7 @@ module.exports = {
 	usage: '<search term>',
 	description: 'github',
 	guildOnly: false,
+	enabled: true,
 	async execute(message, args) {
 		if (!args.length) {
 			return message.reply('you didn\'t give me a search term');

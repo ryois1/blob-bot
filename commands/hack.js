@@ -4,6 +4,7 @@ module.exports = {
 	usage: '<user>',
 	description: 'hack somebody',
 	guildOnly: true,
+	enabled: true,
 	async execute(message, args) {
 		if (!args.length) {
 			return message.reply('you didn\'t name anyone for me to hack!');

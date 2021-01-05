@@ -5,6 +5,7 @@ module.exports = {
 	usage: '<c/f> <temp to convert>',
 	description: 'Celsius to Fahrenheit and vice versa',
 	guildOnly: false,
+	enabled: true,
 	async execute(message, args) {
 		if (!args.length) {
 			return message.reply('you didn\'t provide any arguments!');

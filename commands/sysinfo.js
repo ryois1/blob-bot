@@ -4,6 +4,7 @@ module.exports = {
 	usage: '[Command only]',
 	description: 'Get the bot\'s system info',
 	guildOnly: false,
+	enabled: true,
 	async execute(message) {
 		const os = require('os');
 		String.prototype.toHHMMSS = function() {

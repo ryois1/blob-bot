@@ -5,6 +5,7 @@ module.exports = {
 	aliases: ['foaas'],
 	description: 'FOaaS',
 	guildOnly: false,
+	enabled: true,
 	async execute(message) {
 		const Discord = require('discord.js');
 		const attachment = new Discord.MessageAttachment('./content/fuckoff.gif');

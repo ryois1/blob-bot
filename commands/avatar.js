@@ -4,6 +4,7 @@ module.exports = {
 	cooldown: 3,
 	description: 'Get user avatar',
 	guildOnly: false,
+	enabled: true,
 	async execute(message) {
 		if (!message.mentions.users.size) {
 			return message.channel.send(

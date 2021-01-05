@@ -7,6 +7,7 @@ module.exports = {
 	aliases: ['ball'],
 	description: 'Magic 8 Ball!',
 	guildOnly: false,
+	enabled: true,
 	async execute(message, args) {
 		if (!args.length) {
 			return message.reply('you didn\'t give me a question');

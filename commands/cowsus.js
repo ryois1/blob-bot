@@ -7,6 +7,7 @@ module.exports = {
 	usage: '[Command only]',
 	description: 'Cowsay but kinda sus!',
 	guildOnly: false,
+	enabled: true,
 	async execute(message) {
 		const { messages, places, colors } = JSON.parse(fs.readFileSync('./content/sus.json'));
 		const message_id = Math.floor(Math.random() * messages.length);

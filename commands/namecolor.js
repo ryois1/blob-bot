@@ -5,6 +5,7 @@ module.exports = {
 	aliases: ['namecolour'],
 	description: 'Specify a hex color for your name!',
 	guildOnly: true,
+	enabled: true,
 	execute(message, args) {
 		if (!args.length) {
 			return message.reply('you didn\'t give me a hex color!');

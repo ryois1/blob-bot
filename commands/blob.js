@@ -7,6 +7,7 @@ module.exports = {
 	cooldown: 3,
 	description: 'Random blob!',
 	guildOnly: false,
+	enabled: true,
 	async execute(message) {
 		const chosenFile = files[Math.floor(Math.random() * files.length)];
 		message.channel.send({

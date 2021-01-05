@@ -6,6 +6,7 @@ module.exports = {
 	usage: '[Message]',
 	description: 'Cowsay!',
 	guildOnly: false,
+	enabled: true,
 	async execute(message, args) {
 		let cowsayin = args.join(' ');
 		cowsayin = cowsayin.replace(/[^a-zA-Z0-9 ]/g, '');

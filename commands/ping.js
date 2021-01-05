@@ -4,6 +4,7 @@ module.exports = {
 	usage: '[Command only]',
 	description: 'Ping!',
 	guildOnly: false,
+	enabled: true,
 	async execute(message) {
 		const m = await message.channel.send('Ping?');
 		m.edit(

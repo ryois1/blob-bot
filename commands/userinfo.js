@@ -4,6 +4,7 @@ module.exports = {
 	cooldown: 3,
 	description: 'Get the info of a target',
 	guildOnly: true,
+	enabled: true,
 	async execute(message) {
 		const moment = require('moment');
 		const Discord = require('discord.js');

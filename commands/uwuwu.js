@@ -10,6 +10,7 @@ module.exports = {
 	aliases: ['foaas'],
 	description: 'FOaaS',
 	guildOnly: false,
+	enabled: true,
 	async execute(message) {
 		const uw = '<:uw:778360087432527892>';
 		const wuw = '<:wuw:778360087260823562>';

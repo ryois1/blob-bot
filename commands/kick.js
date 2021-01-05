@@ -4,6 +4,7 @@ module.exports = {
 	usage: '<user>',
 	description: 'Kick a member',
 	guildOnly: true,
+	enabled: true,
 	async execute(message, args) {
 		if (!args.length) {
 			return message.reply('you didn\'t mention anyone to kick.') .then(msg => {

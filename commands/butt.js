@@ -5,6 +5,7 @@ module.exports = {
 	aliases: ['butts'],
 	description: 'Butt',
 	guildOnly: false,
+	enabled: true,
 	async execute(message) {
 		message.channel.send('<a:buttrave:765594101675851817>');
 	},

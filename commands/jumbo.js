@@ -4,6 +4,7 @@ module.exports = {
 	usage: '<Emoji>',
 	description: 'Wumbo an emoji!',
 	guildOnly: false,
+	enabled: true,
 	async execute(message, args) {
 		if (!args.length) {
 			return message.reply('you didn\'t provide an emoji to jumbo!');

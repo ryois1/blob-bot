@@ -20,17 +20,21 @@ for (const file of commandFiles) {
 }
 
 client.on('message', (message) => {
-
 	if (!message.content.startsWith(prefix) || message.author.bot) return;
 	const args = message.content.slice(prefix.length).trim().split(/ +/);
 	const commandName = args.shift().toLowerCase();
-
 	const command =
 	client.commands.get(commandName) ||
 	client.commands.find((cmd) => cmd.aliases && cmd.aliases.includes(commandName),
 	);
 
 	if (!command) return;
+	if (!command.enabled) {
+		message.delete();
+		const msg = message.reply('that command is disabled!');
+		msg.delete({ timeout: 1500 });
+		return;
+	}
 	if (command.args && !args.length) {
 		let reply = `You didn't provide any arguments, ${message.author}!`;
 		if (command.usage) {

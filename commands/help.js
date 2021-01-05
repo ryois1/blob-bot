@@ -5,6 +5,7 @@ module.exports = {
 	usage: '<command name>',
 	cooldown: 1,
 	guildOnly: false,
+	enabled: true,
 	execute(message, args) {
 		const prefix = '!';
 		const data = [];
