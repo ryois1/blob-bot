@@ -30,10 +30,10 @@ client.on('message', (message) => {
 
 	if (!command) return;
 	if (!command.enabled) {
-		message.delete();
-		const msg = message.reply('that command is disabled!');
-		msg.delete({ timeout: 1500 });
-		return;
+		return message.reply('that command is disabled.') .then(msg => {
+			msg.delete({ timeout: 1500 });
+			message.delete({ timeout: 1500 });
+		});
 	}
 	if (command.args && !args.length) {
 		let reply = `You didn't provide any arguments, ${message.author}!`;
