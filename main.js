@@ -43,14 +43,17 @@ client.on('message', (message) => {
 			});
 		}
 	}
-	if (command.args && !args.length) {
-		let reply = `You didn't provide any arguments, ${message.author}!`;
-		if (command.usage) {
-			reply += `\nThe proper usage would be: \`${prefix}${command.name} ${command.usage}\``;
+	if(command.ownerOnly) {
+		if (message.author.id != '236237361703288842') {
+			return message.reply('that command is only available to the owner.') .then(msg => {
+				msg.delete({ timeout: 2500 });
+				message.delete({ timeout: 2500 });
+			});
 		}
-		return message.channel.send(reply);
 	}
-
+	if (command.args && !args.length) {
+		return message.reply(`that command requires some arguments... ${prefix}${command.name} ${command.usage}`);
+	}
 	try {
 		command.execute(message, args, client, token);
 	}
