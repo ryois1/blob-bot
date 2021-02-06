@@ -9,13 +9,13 @@ module.exports = {
 	enabled: true,
 	async execute(message, args) {
 		let cowsayin = args.join(' ');
-		cowsayin = cowsayin.replace(/[^a-zA-Z0-9,.! ]/g, '');
-		if(cowsayin.length > 0) {
+		cowsayin = cowsayin.replace(/[^a-zA-Z0-9,.!:?/ ]/g, '');
+		if(cowsayin.length > 0 && cowsayin.length < 1376) {
 			const cowsayout = cowsay.say({ text: cowsayin });
 			message.channel.send(`\`\`\`${cowsayout}\`\`\``);
 		}
 		else{
-			const cowsayout = cowsay.say({ text: 'The cow did not like that message.' });
+			const cowsayout = cowsay.say({ text: 'The cow did not like that message. (it was either too large or nothing was sent)' });
 			message.channel.send(`\`\`\`${cowsayout}\`\`\``);
 		}
 	},

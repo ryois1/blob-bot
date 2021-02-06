@@ -14,9 +14,7 @@
         "discordjs-logger": "^1.9.42",
         "https": "^1.0.0",
         "moment": "^2.29.1",
-        "mysql": "^2.18.1",
-        "pm2": "^4.5.1",
-        "uuid": "^8.3.2"
+        "pm2": "^4.5.1"
     },
     "scripts": {
         "dev": "node main.js",
