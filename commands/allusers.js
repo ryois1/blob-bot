@@ -5,6 +5,7 @@ module.exports = {
 	description: 'All users',
 	guildOnly: true,
 	enabled: false,
+	allowedGuilds: ['765292849767120897'],
 	async execute(message, args, client) {
 		const list = client.guilds.cache.get('765292849767120897');
 		const data = [];
