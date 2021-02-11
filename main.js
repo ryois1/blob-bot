@@ -55,7 +55,7 @@ client.on('message', (message) => {
 		return message.reply(`that command requires some arguments... ${prefix}${command.name} ${command.usage}`);
 	}
 	try {
-		command.execute(message, args, client, token);
+		command.execute(message, args, client, token, config);
 	}
 	catch (error) {
 		console.error(error);

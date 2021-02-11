@@ -7,8 +7,7 @@ module.exports = {
 	name: 'uwuwu',
 	cooldown: 0,
 	usage: '[Command only]',
-	aliases: ['foaas'],
-	description: 'FOaaS',
+	description: 'uwuwu',
 	guildOnly: false,
 	enabled: true,
 	async execute(message) {
