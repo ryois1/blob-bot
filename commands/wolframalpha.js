@@ -11,7 +11,16 @@ module.exports = {
 	enabled: true,
 	async execute(message, args, client, token, config, logger) {
 		const waApi = WolframAlphaAPI(`${config.WOLFRAM_ALPHA_API_KEY}`);
+		if(args == 0) {
+			return message.reply('Please provide a query');
+		}
 		const query = args.join(' ');
+		const blacklistedQueries = ['ip', 'geoIP'];
+		const regex = new RegExp(blacklistedQueries.join('|'), 'i');
+		const isAvailable = regex.test(query);
+		if(isAvailable) {
+			return message.reply('That query is not allowed');
+		}
 		const m = await message.channel.send('Getting answer from Wolfram Alpha... <a:loading:766090429799858196>');
 		waApi.getSimple(`${query}`)
 			.then(result => {
