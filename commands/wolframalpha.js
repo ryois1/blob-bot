@@ -10,7 +10,7 @@ module.exports = {
 	guildOnly: false,
 	enabled: true,
 	async execute(message, args, client, token, config, logger) {
-		const waApi = WolframAlphaAPI(`${config.WOLFRAM_ALPHA_API_TOKEN}`);
+		const waApi = WolframAlphaAPI(`${config.WOLFRAM_ALPHA_API_KEY}`);
 		const query = args.join(' ');
 		const m = await message.channel.send('Getting answer from Wolfram Alpha... <a:loading:766090429799858196>');
 		waApi.getSimple(`${query}`)
