@@ -1,9 +1,0 @@
-{
-	"prefix": "!",
-	"token": "DISCORD TOKEN",
-	"WOLFRAM_ALPHA_API_KEY" : "APP ID",
-	"blob_bot_discord": "BLOB BOT DISCORD SERVER",
-	"blob_bot_log_channel": "BLOB BOT DISCORD LOG CHANNEL",
-	"blob_bot_owner": "BLOB BOT OWNER",
-	"SENTRY_DSN": "SENTRY LOGGING DSN"
-}
