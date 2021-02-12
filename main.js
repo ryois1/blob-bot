@@ -1,6 +1,7 @@
 const fs = require('fs');
 const Discord = require('discord.js');
 const config = require('./private/config.json');
+const logger = require('./modules/logger');
 const prefix = config.prefix;
 const token = config.token;
 const gitlab = process.env.GITLAB;
@@ -55,17 +56,17 @@ client.on('message', (message) => {
 		return message.reply(`that command requires some arguments... ${prefix}${command.name} ${command.usage}`);
 	}
 	try {
-		command.execute(message, args, client, token, config);
+		command.execute(message, args, client, token, config, logger);
 	}
 	catch (error) {
-		console.error(error);
+		logger.error(client, error);
 		message.reply('there was an error trying to execute that command!');
 	}
 });
 
 client.login(token);
 client.once('ready', () => {
-	console.log('Started blob bot!');
-	console.log(`In ${client.guilds.cache.size} servers`);
+	logger.log(client, 'Started blob bot!');
+	logger.log(client, `blob bot is in ${client.guilds.cache.size} servers`);
 	client.user.setActivity(`over ${client.guilds.cache.size} servers`, { type: 'WATCHING' });
 });

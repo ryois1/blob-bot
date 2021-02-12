@@ -6,13 +6,16 @@ module.exports = {
 	guildOnly: false,
 	enabled: true,
 	ownerOnly: true,
-	async execute(message, args, client) {
+	execute(message, args, client, token, config, logger) {
 		if (!args.length) {
 			return message.reply('you didn\'t provide an image URL!');
 		}
 		client.user
 			.setAvatar(`${args}`)
 			.then(() => message.channel.send('Changed avatar of bot'))
-			.catch((error) => message.channel.send(`Error: ${error}`));
+			.catch((error) => {
+				logger.error(client, error);
+				message.channel.send(`Error: ${error}`);
+			});
 	},
 };

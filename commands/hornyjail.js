@@ -6,7 +6,7 @@ module.exports = {
 	guildOnly: true,
 	enabled: true,
 	allowedGuilds: ['765292849767120897'],
-	execute(message, args) {
+	execute(message, args, client, token, config, logger) {
 		if (!args.length) {
 			return message.reply('you didn\'t mention a user to send to horny jail.') .then(msg => {
 				msg.delete({ timeout: 1500 });
@@ -21,14 +21,20 @@ module.exports = {
 				member.roles
 					.add(role)
 					.then(message.reply(`Sent ${user.username || user.id || user} to horny jail.`))
-					.catch(console.error);
+					.catch((error) => {
+						logger.error(client, error);
+						message.channel.send(`Error: ${error}`);
+					});
 			}
 			else {
 				const role = message.guild.roles.cache.get('805590522051690547');
 				message.guild.members
 					.add(role)
 					.then((user) => message.reply(`Sent ${user.username || user.id || user} to horny jail.`))
-					.catch(console.error);
+					.catch((error) => {
+						logger.error(client, error);
+						message.channel.send(`Error: ${error}`);
+					});
 			}
 		}
 		else {

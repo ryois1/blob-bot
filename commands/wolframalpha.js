@@ -9,7 +9,7 @@ module.exports = {
 	description: 'Wolfram Alpha',
 	guildOnly: false,
 	enabled: true,
-	async execute(message, args, client, token, config) {
+	async execute(message, args, client, token, config, logger) {
 		const waApi = WolframAlphaAPI(`${config.WOLFRAM_ALPHA_API_TOKEN}`);
 		const query = args.join(' ');
 		const m = await message.channel.send('Getting answer from Wolfram Alpha... <a:loading:766090429799858196>');
@@ -22,7 +22,7 @@ module.exports = {
 			})
 			.catch(error => {
 				m.edit(`${error}`);
-				console.log(error);
+				logger.error(client, error);
 			});
 	},
 };

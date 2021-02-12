@@ -5,7 +5,7 @@ module.exports = {
 	description: 'Kick a member',
 	guildOnly: true,
 	enabled: true,
-	async execute(message, args) {
+	execute(message, args, client, token, config, logger) {
 		if (!args.length) {
 			return message.reply('you didn\'t mention anyone to kick.') .then(msg => {
 				msg.delete({ timeout: 1500 });
@@ -26,7 +26,10 @@ module.exports = {
 								}`,
 							),
 						)
-						.catch((error) => message.channel.send(`Error: ${error}`));
+						.catch((error) => {
+							logger.error(client, error);
+							message.channel.send(`Error: ${error}`);
+						});
 				}
 			}
 			else {
@@ -39,7 +42,10 @@ module.exports = {
 							}`,
 						),
 					)
-					.catch((error) => message.channel.send(`Error: ${error}`));
+					.catch((error) => {
+						logger.error(client, error);
+						message.channel.send(`Error: ${error}`);
+					});
 			}
 		}
 		else {

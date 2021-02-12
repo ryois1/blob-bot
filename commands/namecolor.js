@@ -7,7 +7,7 @@ module.exports = {
 	guildOnly: true,
 	enabled: true,
 	allowedGuilds: ['765292849767120897'],
-	execute(message, args) {
+	execute(message, args, client, token, config, logger) {
 		if (!args.length) {
 			return message.reply('you didn\'t give me a hex color!');
 		}
@@ -21,10 +21,15 @@ module.exports = {
 						name:`${message.author.id}`,
 						color:`${args}`,
 					},
-				}).then((userRole) => message.member.roles.add(userRole)).catch(console.error);
+				}).then((userRole) => message.member.roles.add(userRole))
+					.catch((error) => {
+						logger.error(client, error);
+						message.channel.send(`Error: ${error}`);
+					});
 			}
 			catch (error) {
-				console.log(error);
+				logger.error(client, error);
+				message.channel.send(`Error: ${error}`);
 			}
 		}
 		else {
@@ -32,7 +37,6 @@ module.exports = {
 				color: `${args}`,
 			});
 		}
-
 		message.reply(`Changed your name's color to ${args}!`);
 	},
 };

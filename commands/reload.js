@@ -6,7 +6,7 @@ module.exports = {
 	description: 'Reloads a command',
 	guildOnly: false,
 	enabled: true,
-	execute(message, args) {
+	execute(message, args, client, token, config, logger) {
 		if (message.member.hasPermission('ADMINISTRATOR')) {
 			if (!args.length) {
 				return message.reply(
@@ -30,7 +30,7 @@ module.exports = {
 				message.client.commands.set(newCommand.name, newCommand);
 			}
 			catch (error) {
-				console.log(error);
+				logger.error(client, error);
 				message.reply(`there was an error while reloading a command \`${command.name}\`:\n\`${error.message}\``);
 			}
 			message.reply(`Command \`${command.name}\` was reloaded!`) .then(msg => {
