@@ -1,4 +1,4 @@
-private
+private/config.json
 # Logs
 logs
 *.log
