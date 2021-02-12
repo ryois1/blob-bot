@@ -1,3 +1,6 @@
+const si = require('systeminformation');
+const moment = require('moment');
+const prettyBytes = require('pretty-bytes');
 module.exports = {
 	name: 'sysinfo',
 	cooldown: 10,
@@ -5,8 +8,8 @@ module.exports = {
 	description: 'Get the bot\'s system info',
 	guildOnly: false,
 	enabled: true,
-	async execute(message) {
-		const os = require('os');
+	execute(message, args, client, token, config, logger) {
+		const outputMessage = [];
 		String.prototype.toHHMMSS = function() {
 			let seconds = parseInt(this, 10);
 			seconds = Number(seconds);
@@ -20,28 +23,27 @@ module.exports = {
 			const sDisplay = s > 0 ? s + (s == 1 ? ' second' : ' seconds') : '';
 			return dDisplay + hDisplay + mDisplay + sDisplay;
 		};
-		function getSystemInfo() {
-			return {
-				osPlatform: process.platform,
-				osRelease: os.type() + ' ' + os.release(),
-				architecture: os.arch(),
-				totalMemoryMB: os.totalmem() / 1048576,
-				numCores: os.cpus().length,
-				bytesAvailable: os.freemem() / 1048576,
-				cpus: os.cpus(),
-				uptime: os.uptime(),
-			};
-		}
-		const sysinfo = getSystemInfo();
-		const uptime = (sysinfo.uptime + '').toHHMMSS();
-		message.channel.send(
-			`CPU Model: ${sysinfo.numCores} x ${
-				sysinfo.cpus[0].model
-			}\nServer Uptime: ${uptime}\nServer Kernel: ${
-				sysinfo.osRelease
-			}\nServer Memory: ${sysinfo.bytesAvailable.toFixed(
-				2,
-			)}MB/${sysinfo.totalMemoryMB.toFixed(2)}MB`,
-		);
+		const timeData = si.time();
+		const now = Math.round(Date.now() / 1000);
+		const serverUptime = timeData.uptime;
+		const humanUptime = (serverUptime + '').toHHMMSS();
+		outputMessage.push(`**Uptime:** ${humanUptime}`);
+		outputMessage.push(`**Server Time:** ${moment.unix(now).format('M/d/YYYY, h:mm:ss A')} (Timezone: ${timeData.timezoneName})`);
+		si.cpu()
+			.then(data => {
+				outputMessage.push(`**CPU:** ${data.manufacturer} ${data.brand} @ ${data.speed}GHz (Sockets: ${data.processors}, Cores: ${data.cores})`);
+				si.mem()
+					.then(memData => {
+						outputMessage.push(`**RAM:** ${prettyBytes(memData.total)} Used ${prettyBytes(memData.used)} Free ${prettyBytes(memData.free)} (Swap Total: ${prettyBytes(memData.swaptotal)}, Swap Used: ${prettyBytes(memData.swapused)})`);
+						si.osInfo()
+							.then(osData => {
+								outputMessage.push(`**OS:** ${osData.distro} ${osData.release} (Kernel: ${osData.kernel})`);
+								message.channel.send(outputMessage, { split: true });
+							})
+							.catch(error => logger.error(client, error));
+					})
+					.catch(error => logger.error(client, error));
+			})
+			.catch(error => logger.error(client, error));
 	},
 };

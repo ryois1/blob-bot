@@ -18,6 +18,8 @@
         "https": "^1.0.0",
         "moment": "^2.29.1",
         "pm2": "^4.5.1",
+        "pretty-bytes": "^5.5.0",
+        "systeminformation": "^4.34.10",
         "wolfram-alpha-api": "https://products.wolframalpha.com/api/libraries/javascript/wolfram-alpha-api-1.0.0-rc.1.tgz"
     },
     "scripts": {
