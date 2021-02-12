@@ -1,5 +1,8 @@
 const WolframAlphaAPI = require('wolfram-alpha-api');
-const Discord = require('discord.js');
+const { v4: uuidv4 } = require('uuid');
+const axios = require('axios');
+const FormData = require('form-data');
+const fs = require('fs');
 
 module.exports = {
 	name: 'wolframalpha',
@@ -21,13 +24,46 @@ module.exports = {
 		if(isAvailable) {
 			return message.reply('That query is not allowed');
 		}
-		const m = await message.channel.send('Getting answer from Wolfram Alpha... <a:loading:766090429799858196>');
+		const m = await message.channel.send(`Getting answer from Wolfram Alpha... ${config.LOADING_EMOJI}`);
 		waApi.getSimple(`${query}`)
 			.then(result => {
+				const uuid = uuidv4();
 				const imageStream = Buffer.from(result.replace(/^data:image\/(png|gif|jpeg);base64,/, ''), 'base64');
-				const attachment = new Discord.MessageAttachment(imageStream);
-				message.channel.send(attachment);
-				m.delete();
+				const fileName = `./content/wolfram-alpha-${uuid}.jpg`;
+				fs.writeFileSync(fileName, imageStream);
+				const data = new FormData();
+				data.append('image', fs.createReadStream(`${fileName}`));
+				data.append('domain_intent', config.BLOB_IMAGE_HOSTING_DOMAIN);
+				m.edit(`Got response, sending... ${config.LOADING_EMOJI}`);
+				const uploadConfig = {
+					method: 'post',
+					url: config.BLOB_IMAGE_HOSTING_API_URL,
+					headers: {
+						'token': config.BLOB_IMAGE_HOSTING_API_KEY,
+						...data.getHeaders(),
+					},
+					data : data,
+				};
+				axios(uploadConfig)
+					.then(function(response) {
+						if(response.data.error) {
+							m.delete();
+							fs.unlinkSync(fileName);
+							return message.reply(`There was an error sending the result... ${response.data.error_message}`);
+						}
+						else{
+							console.log(response);
+							fs.unlinkSync(fileName);
+							message.reply(response.data.url);
+							m.delete();
+						}
+					})
+					.catch(function(error) {
+						console.log(error);
+						fs.unlinkSync(fileName);
+						return m.edit(`There was an error sending the result... ${error.response.data.error_message}`);
+					});
+
 			})
 			.catch(error => {
 				m.edit(`${error}`);

@@ -5,7 +5,7 @@ module.exports = {
 	description: 'Get bot stats',
 	guildOnly: false,
 	enabled: true,
-	async execute(message, args, client) {
+	async execute(message, args, client, token, config) {
 		const os = require('os');
 		function getSystemInfo() {
 			return {
@@ -39,7 +39,7 @@ module.exports = {
 		const procUptime = process.uptime();
 		const uptime = (sysinfo.uptime + '').toHHMMSS();
 		const Discord = require('discord.js');
-		const botMsg = await message.channel.send('Getting stats... <a:loading:766090429799858196>');
+		const botMsg = await message.channel.send(`Getting stats... ${config.LOADING_EMOJI}`);
 		const outputEmbed = new Discord.MessageEmbed()
 			.setColor('#0099ff')
 			.setTitle('Blob Bot Stats')

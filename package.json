@@ -11,15 +11,18 @@
         "@sentry/node": "^6.1.0",
         "@sentry/tracing": "^6.1.0",
         "8ball": "^1.0.6",
+        "axios": "^0.21.1",
         "chalk": "^4.1.0",
         "cowsay": "^1.4.0",
         "discord.js": "^12.5.1",
         "discordjs-logger": "^1.9.42",
+        "form-data": "^3.0.0",
         "https": "^1.0.0",
         "moment": "^2.29.1",
         "pm2": "^4.5.1",
         "pretty-bytes": "^5.5.0",
         "systeminformation": "^4.34.10",
+        "uuid": "^8.3.2",
         "wolfram-alpha-api": "https://products.wolframalpha.com/api/libraries/javascript/wolfram-alpha-api-1.0.0-rc.1.tgz"
     },
     "scripts": {
