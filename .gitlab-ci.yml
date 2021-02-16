@@ -2,23 +2,33 @@ stages:
     - check
     - build
     - test
+    - push
 eslint:
     stage: check
     script:
         - npm i
         - node_modules/eslint/bin/eslint.js .
-build_container:
+build:
     stage: build
     needs: 
         - eslint
-    before_script:
-        - docker info
     script:
-        - docker build -t ryois/blob-bot .
-run_container:
+        - docker build -t ryois/blob-bot:latest .
+test:
     stage: test
     needs: 
         - eslint
-        - build_container
+        - build
     script:
         - docker run -e CI=true  ryois/blob-bot npm run test
+push:
+    stage: push
+    needs: 
+        - eslint
+        - build
+        - test
+    script:
+        - echo "$CI_REGISTRY_PASSWORD" | docker login $CI_REGISTRY --username $CI_REGISTRY_USER --password-stdin
+        - docker info
+        - docker tag ryois/blob-bot:latest $CI_REGISTRY/blob-bot/blob-bot:latest
+        - docker push $CI_REGISTRY/blob-bot/blob-bot:latest
