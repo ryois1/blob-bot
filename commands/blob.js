@@ -12,7 +12,7 @@ module.exports = {
 		const chosenFile = files[Math.floor(Math.random() * files.length)];
 		message.channel.send({
 			files: [{
-				attachment: `/root/blob-bot/content/blobs/${chosenFile}`,
+				attachment: `./content/blobs/${chosenFile}`,
 			}],
 		});
 	},
