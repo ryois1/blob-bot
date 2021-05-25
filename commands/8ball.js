@@ -1,5 +1,3 @@
-const eightball = require('8ball')();
-
 module.exports = {
 	name: '8ball',
 	usage: '[Command only]',
@@ -9,6 +7,7 @@ module.exports = {
 	guildOnly: false,
 	enabled: true,
 	async execute(message, args) {
+		const eightball = require('8ball')();
 		if (!args.length) {
 			return message.reply('you didn\'t give me a question');
 		}
