@@ -8,6 +8,7 @@ module.exports = {
 	description: 'Get the bot\'s system info',
 	guildOnly: false,
 	enabled: true,
+	disabledGuilds: ['851802737662099456'],
 	execute(message, args, client, token, config, logger) {
 		const outputMessage = [];
 		String.prototype.toHHMMSS = function() {

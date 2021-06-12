@@ -6,6 +6,7 @@ module.exports = {
 	description: 'Restarts the bot',
 	guildOnly: false,
 	enabled: true,
+	disabledGuilds: ['851802737662099456'],
 	async execute(message, args, client, token) {
 		if (message.member.hasPermission('ADMINISTRATOR')) {
 			console.log('RESTARTED BOT');

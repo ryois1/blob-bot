@@ -6,6 +6,7 @@ module.exports = {
 	description: 'Reloads a command',
 	guildOnly: false,
 	enabled: true,
+	disabledGuilds: ['851802737662099456'],
 	execute(message, args, client, token, config, logger) {
 		if (message.member.hasPermission('ADMINISTRATOR')) {
 			if (!args.length) {

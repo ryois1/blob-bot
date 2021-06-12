@@ -6,6 +6,7 @@ module.exports = {
 	guildOnly: true,
 	enabled: true,
 	allowedGuilds: ['765292849767120897'],
+	disabledGuilds: ['851802737662099456'],
 	execute(message, args, client, token, config, logger) {
 		if (!args.length) {
 			return message.reply('you didn\'t mention a user to send to horny jail.') .then(msg => {

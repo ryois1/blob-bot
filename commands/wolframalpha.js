@@ -12,6 +12,7 @@ module.exports = {
 	description: 'Wolfram Alpha',
 	guildOnly: false,
 	enabled: true,
+	disabledGuilds: ['851802737662099456'],
 	async execute(message, args, client, token, config, logger) {
 		const waApi = WolframAlphaAPI(`${config.WOLFRAM_ALPHA_API_KEY}`);
 		if(args == 0) {

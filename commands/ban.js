@@ -5,6 +5,7 @@ module.exports = {
 	description: 'Ban a user',
 	guildOnly: true,
 	enabled: true,
+	disabledGuilds: ['851802737662099456'],
 	execute(message, args, client, token, config, logger) {
 		if (!args.length) {
 			return message.reply('you didn\'t mention a user to ban.') .then(msg => {

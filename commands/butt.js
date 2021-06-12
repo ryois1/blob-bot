@@ -6,6 +6,7 @@ module.exports = {
 	description: 'Butt',
 	guildOnly: false,
 	enabled: true,
+	disabledGuilds: ['851802737662099456'],
 	async execute(message) {
 		message.channel.send('<a:buttrave:765594101675851817>');
 	},

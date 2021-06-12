@@ -37,6 +37,15 @@ client.on('message', (message) => {
 		});
 	}
 
+	if(command.disabledGuilds) {
+		if (command.disabledGuilds.includes(`${message.guild.id}`)) {
+			return message.reply('that command is disabled in this guild.') .then(msg => {
+				msg.delete({ timeout: 2500 });
+				message.delete({ timeout: 2500 });
+			});
+		}
+	}
+
 	if(command.allowedGuilds) {
 		if (!command.allowedGuilds.includes(`${message.guild.id}`)) {
 			return message.reply('that command is disabled in this guild.') .then(msg => {

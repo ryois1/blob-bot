@@ -7,6 +7,7 @@ module.exports = {
 	description: 'Yellow sus',
 	guildOnly: true,
 	enabled: true,
+	disabledGuilds: ['851802737662099456'],
 	async execute(message) {
 		const { channel } = message;
 		const { messages, places, colors } = JSON.parse(fs.readFileSync('./content/sus.json'));

@@ -5,6 +5,7 @@ module.exports = {
 	description: 'Get user avatar',
 	guildOnly: false,
 	enabled: true,
+	disabledGuilds: ['851802737662099456'],
 	async execute(message) {
 		if (!message.mentions.users.size) {
 			return message.channel.send(

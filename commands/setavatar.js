@@ -6,6 +6,7 @@ module.exports = {
 	guildOnly: false,
 	enabled: true,
 	ownerOnly: true,
+	disabledGuilds: ['851802737662099456'],
 	execute(message, args, client, token, config, logger) {
 		if (!args.length) {
 			return message.reply('you didn\'t provide an image URL!');

@@ -7,6 +7,7 @@ module.exports = {
 	description: 'Random Eve art!',
 	guildOnly: false,
 	enabled: true,
+	disabledGuilds: ['851802737662099456'],
 	async execute(message) {
 		const files = fs.readdirSync('./content/evedrawings/');
 		const chosenFile = files[Math.floor(Math.random() * files.length)];

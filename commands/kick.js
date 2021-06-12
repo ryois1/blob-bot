@@ -5,6 +5,7 @@ module.exports = {
 	description: 'Kick a member',
 	guildOnly: true,
 	enabled: true,
+	disabledGuilds: ['851802737662099456'],
 	execute(message, args, client, token, config, logger) {
 		if (!args.length) {
 			return message.reply('you didn\'t mention anyone to kick.') .then(msg => {

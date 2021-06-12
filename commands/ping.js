@@ -5,6 +5,7 @@ module.exports = {
 	description: 'Ping!',
 	guildOnly: false,
 	enabled: true,
+	disabledGuilds: ['851802737662099456'],
 	async execute(message, args, client, token, config) {
 		const m = await message.channel.send(config.LOADING_EMOJI);
 		m.edit(

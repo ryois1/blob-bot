@@ -5,6 +5,7 @@ module.exports = {
 	description: 'github',
 	guildOnly: false,
 	enabled: true,
+	disabledGuilds: ['851802737662099456'],
 	async execute(message, args) {
 		if (!args.length) {
 			return message.reply('you didn\'t give me a search term');

@@ -8,6 +8,7 @@ module.exports = {
 	description: 'DNS Lookup',
 	guildOnly: false,
 	enabled: true,
+	disabledGuilds: ['851802737662099456'],
 	async execute(message, args, client, token, config, logger) {
 		if (args == 0) {
 			return message.reply('Please provide a query');

@@ -8,6 +8,7 @@ module.exports = {
 	description: 'Cowsay but kinda sus!',
 	guildOnly: false,
 	enabled: true,
+	disabledGuilds: ['851802737662099456'],
 	async execute(message) {
 		const { messages, places, colors } = JSON.parse(fs.readFileSync('./content/sus.json'));
 		const message_id = Math.floor(Math.random() * messages.length);

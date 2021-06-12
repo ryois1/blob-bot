@@ -5,6 +5,7 @@ module.exports = {
 	description: 'Celsius to Fahrenheit',
 	guildOnly: false,
 	enabled: true,
+	disabledGuilds: ['851802737662099456'],
 	async execute(message, args) {
 		if (!args.length) {
 			return message.reply('you didn\'t provide any arguments!');

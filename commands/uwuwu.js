@@ -10,6 +10,7 @@ module.exports = {
 	description: 'uwuwu',
 	guildOnly: false,
 	enabled: true,
+	disabledGuilds: ['851802737662099456'],
 	async execute(message) {
 		const uw = '<:uw:778360087432527892>';
 		const wuw = '<:wuw:778360087260823562>';

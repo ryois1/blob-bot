@@ -6,7 +6,7 @@ module.exports = {
 	description: 'Specify a hex color for your name!',
 	guildOnly: true,
 	enabled: true,
-	allowedGuilds: ['765292849767120897'],
+	allowedGuilds: ['765292849767120897', '851802737662099456'],
 	execute(message, args, client, token, config, logger) {
 		if (!args.length) {
 			return message.reply('you didn\'t give me a hex color!');

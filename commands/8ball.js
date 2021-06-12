@@ -6,6 +6,7 @@ module.exports = {
 	description: 'Magic 8 Ball!',
 	guildOnly: false,
 	enabled: true,
+	disabledGuilds: ['851802737662099456'],
 	async execute(message, args) {
 		const eightball = require('8ball')();
 		if (!args.length) {
