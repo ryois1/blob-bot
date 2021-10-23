@@ -19,12 +19,6 @@ module.exports = {
 			return message.reply('Please provide a query');
 		}
 		const query = args.join(' ');
-		const blacklistedQueries = ['ip', 'geoIP'];
-		const regex = new RegExp(blacklistedQueries.join('|'), 'i');
-		const isAvailable = regex.test(query);
-		if(isAvailable) {
-			return message.reply('That query is not allowed');
-		}
 		const m = await message.channel.send(`Getting answer from Wolfram Alpha... ${config.LOADING_EMOJI}`);
 		waApi.getSimple(`${query}`)
 			.then(result => {
