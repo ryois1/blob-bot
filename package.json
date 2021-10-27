@@ -20,7 +20,7 @@
         "moment": "^2.29.1",
         "node-dig-dns": "^0.2.12",
         "pretty-bytes": "^5.5.0",
-        "systeminformation": "^4.34.10",
+        "systeminformation": "^5.6.4",
         "uuid": "^8.3.2"
     },
     "scripts": {
