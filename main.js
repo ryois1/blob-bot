@@ -1,6 +1,6 @@
 const fs = require('fs');
 const Discord = require('discord.js');
-const config = require('./private/config.json');
+const config = process.env;
 const logger = require('./modules/logger');
 const prefix = config.prefix;
 const token = config.token;

@@ -1,8 +1,7 @@
-FROM node:14
-RUN mkdir -p /home/node/app/node_modules && chown -R node:node /home/node/app
-WORKDIR /home/node/app
+FROM node:16
+WORKDIR /usr/src/app
 COPY package*.json ./
-USER node
-RUN npm install
-COPY --chown=node:node . .
+RUN npm ci --only=production
+COPY . .
+EXPOSE 8080
 CMD [ "node", "main.js" ]

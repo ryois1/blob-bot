@@ -1,6 +1,6 @@
 const chalk = require('chalk');
 const moment = require('moment');
-const config = require('../private/config.json');
+const config = process.env;
 function log(client, message) {
 	const current_time = moment().format('M/d/YYYY, h:mm:ss A');
 	console.log(chalk.green(`[BLOB-BOT LOG - ${current_time}] ${message}`));
