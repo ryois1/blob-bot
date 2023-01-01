@@ -7,7 +7,7 @@ module.exports = {
         .addStringOption(option =>
             option
                 .setName('hex')
-                .setDescription('The reason for banning')
+                .setDescription('Hex Color for Role')
                 .setRequired(true)),
 
     async execute(interaction) {
