@@ -4,6 +4,7 @@ module.exports = {
 	enabled: true,
 	guildOnly: false,
 	ownerOnly: false,
+	category: 'utility',
 	data: new SlashCommandBuilder()
 		.setName('ping')
 		.setDescription('Replies with Pong!'),

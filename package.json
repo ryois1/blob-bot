@@ -8,6 +8,7 @@
     "license": "GNU GPLv3",
     "dependencies": {
         "discord.js": "^14.7.1",
+        "module-alias": "^2.2.2",
         "mysql": "^2.18.1"
     },
     "scripts": {
@@ -16,5 +17,11 @@
     },
     "devDependencies": {
         "eslint": "^8.31.0"
+    },
+    "_moduleAliases": {
+        "@root": ".",
+        "@src": "src/",
+        "@commands": "src/commands/",
+        "@events": "src/events/"
     }
 }
