@@ -1,6 +1,9 @@
 const { SlashCommandBuilder } = require('discord.js');
 
 module.exports = {
+	enabled: true,
+	guildOnly: false,
+	ownerOnly: false,
 	data: new SlashCommandBuilder()
 		.setName('ping')
 		.setDescription('Replies with Pong!'),

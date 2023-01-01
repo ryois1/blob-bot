@@ -1,6 +1,9 @@
 const { SlashCommandBuilder, PermissionsBitField } = require('discord.js');
 
 module.exports = {
+	enabled: true,
+	guildOnly: false,
+	ownerOnly: false,
 	data: new SlashCommandBuilder()
 		.setName('reload')
 		.setDescription('Reloads a command')

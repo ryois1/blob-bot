@@ -1,6 +1,10 @@
 const { SlashCommandBuilder } = require('discord.js');
 
 module.exports = {
+	enabled: true,
+	guildOnly: true,
+	ownerOnly: false,
+	allowedGuilds: ['765292849767120897', '851802737662099456'],
 	data: new SlashCommandBuilder()
 		.setName('namecolor')
 		.setDescription('Specify a hex color for your name!')

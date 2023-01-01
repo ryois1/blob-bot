@@ -1,14 +1,18 @@
 const fs = require('node:fs');
 const path = require('node:path');
-// Require the necessary discord.js classes
 const { Client, GatewayIntentBits, Collection } = require('discord.js');
 const token = process.env.DISCORD_TOKEN;
-// Create a new client instance
+
+// Bot Client Instance
 const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent, GatewayIntentBits.GuildMembers] });
 
+
+// Get Events files
 const eventsPath = path.join(__dirname, 'events');
 const eventFiles = fs.readdirSync(eventsPath).filter(file => file.endsWith('.js'));
 
+
+// Load Events
 for (const file of eventFiles) {
 	const filePath = path.join(eventsPath, file);
 	const event = require(filePath);
@@ -20,15 +24,20 @@ for (const file of eventFiles) {
 	}
 }
 
+
+// Initalize Command Collection
 client.commands = new Collection();
 
+
+// Get Commands files
 const commandsPath = path.join(__dirname, 'commands');
 const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
 
+
+// Load Commands
 for (const file of commandFiles) {
 	const filePath = path.join(commandsPath, file);
 	const command = require(filePath);
-	// Set a new item in the Collection with the key as the command name and the value as the exported module
 	if ('data' in command && 'execute' in command) {
 		client.commands.set(command.data.name, command);
 	}
