@@ -10,7 +10,7 @@
         "discord.js": "^14.7.1"
     },
     "scripts": {
-        "dev": "node index.js",
+        "deploycommands": "node deploy-commands.js",
         "start": "node index.js"
     },
     "devDependencies": {
