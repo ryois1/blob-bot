@@ -20,6 +20,8 @@
     },
     "_moduleAliases": {
         "@root": ".",
-        "@commands": "commands/"
+        "@src": "src/",
+        "@commands": "src/commands/",
+        "@events": "src/events/"
     }
 }

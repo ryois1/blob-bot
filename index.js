@@ -4,14 +4,14 @@ const path = require('node:path');
 const config = process.env;
 const { Client, GatewayIntentBits, Collection } = require('discord.js');
 const token = config.DISCORD_TOKEN;
-const database = require('./database')(config);
+const database = require('@src/database')(config);
 
 // Bot Client Instance
 const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent, GatewayIntentBits.GuildMembers] });
 client.db = database;
 
 // Get Events files
-const eventsPath = path.join(__dirname, 'events');
+const eventsPath = path.join(__dirname, 'src/events');
 const eventsFolders = fs.readdirSync(eventsPath);
 
 for (const folder of eventsFolders) {
@@ -30,7 +30,7 @@ for (const folder of eventsFolders) {
 client.commands = new Collection();
 
 // Get Commands files
-const commandsPath = path.join(__dirname, 'commands');
+const commandsPath = path.join(__dirname, 'src/commands');
 const commandsFolders = fs.readdirSync(commandsPath);
 
 for (const folder of commandsFolders) {
