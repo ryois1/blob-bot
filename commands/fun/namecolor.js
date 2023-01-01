@@ -4,6 +4,7 @@ module.exports = {
 	enabled: true,
 	guildOnly: true,
 	ownerOnly: false,
+	category: 'fun',
 	data: new SlashCommandBuilder()
 		.setName('namecolor')
 		.setDescription('Specify a hex color for your name!')

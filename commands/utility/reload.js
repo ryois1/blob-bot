@@ -4,6 +4,7 @@ module.exports = {
 	enabled: true,
 	guildOnly: false,
 	ownerOnly: false,
+	category: 'utility',
 	data: new SlashCommandBuilder()
 		.setName('reload')
 		.setDescription('Reloads a command')
@@ -20,9 +21,9 @@ module.exports = {
 			if (!command.data) {
 				await interaction.reply({ content: 'There is no command with that name.', ephemeral: true });
 			}
-			delete require.cache[require.resolve(`./${command.data.name}.js`)];
+			delete require.cache[require.resolve(`@commands/${command.category}/${command.data.name}.js`)];
 			try {
-				const newCommand = require(`./${command.data.name}.js`);
+				const newCommand = require(`@commands/${command.category}/${command.data.name}.js`);
 				interaction.client.commands.set(newCommand.data.name, newCommand);
 			}
 			catch (error) {

@@ -11,7 +11,7 @@ module.exports = {
 			}
 			if (interaction.guildId == null) resolve([true]);
 			interaction.client.db.query('SELECT status FROM commands_guilds WHERE command_name = ? AND guild_id = ?', [interaction.commandName, interaction.guild.id], async function(error, result) {
-				if (error) console.log(error);
+				if (error) console.error(error);
 				if (result.length > 0) {
 					if (result[0].status) resolve([true]);
 					else resolve([false, 'command is disabled for this server']);
