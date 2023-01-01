@@ -1,13 +1,14 @@
 {
     "name": "blobbot",
-    "version": "2.0.0",
+    "version": "2.1.0",
     "description": "A Discord bot!",
     "main": "index.js",
     "keywords": [],
     "author": "Ryois",
     "license": "GNU GPLv3",
     "dependencies": {
-        "discord.js": "^14.7.1"
+        "discord.js": "^14.7.1",
+        "mysql": "^2.18.1"
     },
     "scripts": {
         "deploycommands": "node deploy-commands.js",
