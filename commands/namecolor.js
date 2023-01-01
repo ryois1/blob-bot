@@ -1,42 +1,45 @@
+const { SlashCommandBuilder } = require('discord.js');
+
 module.exports = {
-	name: 'namecolor',
-	cooldown: 5,
-	usage: '<hex color>',
-	aliases: ['namecolour'],
-	description: 'Specify a hex color for your name!',
-	guildOnly: true,
 	enabled: true,
-	allowedGuilds: ['765292849767120897', '851802737662099456'],
-	execute(message, args, client, token, config, logger) {
-		if (!args.length) {
-			return message.reply('you didn\'t give me a hex color!');
-		}
-		const guild = message.guild;
-		const roleName = `${message.author.id}`;
-		const role = message.guild.roles.cache.find(x => x.name == roleName);
-		if(!role) {
+	guildOnly: true,
+	ownerOnly: false,
+	data: new SlashCommandBuilder()
+		.setName('namecolor')
+		.setDescription('Specify a hex color for your name!')
+		.addStringOption(option =>
+			option
+				.setName('hex')
+				.setDescription('Hex Color for Role')
+				.setRequired(true)),
+
+	async execute(interaction) {
+		const hex = interaction.options.getString('hex');
+		const guild = interaction.guild;
+		const roleName = `${interaction.user.id}`;
+		const role = interaction.guild.roles.cache.find(x => x.name == roleName);
+		if (!role) {
 			try {
 				guild.roles.create({
-					data:{
-						name:`${message.author.id}`,
-						color:`${args}`,
+					data: {
+						name: `${interaction.user.id}`,
+						color: `${hex}`,
 					},
-				}).then((userRole) => message.member.roles.add(userRole))
+				}).then((userRole) => interaction.user.roles.add(userRole))
 					.catch((error) => {
-						logger.error(client, error);
-						message.channel.send(`Error: ${error}`);
+						// logger.error(client, error);
+						interaction.reply({ content: `Failed to update role: ${error}`, ephemeral: true });
 					});
 			}
 			catch (error) {
-				logger.error(client, error);
-				message.channel.send(`Error: ${error}`);
+				// logger.error(client, error);
+				interaction.reply({ content: `Failed to update role: ${error}`, ephemeral: true });
 			}
 		}
 		else {
-			role.edit({
-				color: `${args}`,
-			});
+			role.setColor(hex);
 		}
-		message.reply(`Changed your name's color to ${args}!`);
+
+		await interaction.reply({ content: `Changed your name's color to ${hex}!`, ephemeral: true });
 	},
 };

@@ -1,15 +1,15 @@
+const { SlashCommandBuilder } = require('discord.js');
+
 module.exports = {
-	name: 'ping',
-	cooldown: 3,
-	usage: '[Command only]',
-	description: 'Ping!',
-	guildOnly: false,
 	enabled: true,
-	disabledGuilds: ['851802737662099456'],
-	async execute(message, args, client, token, config) {
-		const m = await message.channel.send(config.LOADING_EMOJI);
-		m.edit(
-			`Pong 🏓! Latency is ${m.createdTimestamp - message.createdTimestamp}ms.`,
-		);
+	guildOnly: false,
+	ownerOnly: false,
+	data: new SlashCommandBuilder()
+		.setName('ping')
+		.setDescription('Replies with Pong!'),
+
+	async execute(interaction) {
+		const sent = await interaction.reply({ content: 'Pinging...', fetchReply: true });
+		interaction.editReply(`Pong 🏓! Latency is ${sent.createdTimestamp - interaction.createdTimestamp}ms.`);
 	},
 };

@@ -1,34 +1,20 @@
 {
     "name": "blobbot",
-    "version": "1.9.3",
+    "version": "2.1.0",
     "description": "A Discord bot!",
-    "main": "main.js",
+    "main": "index.js",
     "keywords": [],
     "author": "Ryois",
     "license": "GNU GPLv3",
     "dependencies": {
-        "@octokit/rest": "^18.0.12",
-        "8ball": "^1.0.6",
-        "axios": "^0.21.1",
-        "chalk": "^4.1.0",
-        "cowsay": "^1.4.0",
-        "discord.js": "^12.5.1",
-        "discordjs-logger": "^1.9.42",
-        "form-data": "^3.0.0",
-        "https": "^1.0.0",
-        "ip-cidr": "^2.1.2",
-        "moment": "^2.29.1",
-        "node-dig-dns": "^0.2.12",
-        "pretty-bytes": "^5.5.0",
-        "systeminformation": "^4.34.10",
-        "uuid": "^8.3.2"
+        "discord.js": "^14.7.1",
+        "mysql": "^2.18.1"
     },
     "scripts": {
-        "dev": "node main.js",
-        "start": "node main.js",
-        "test": "echo \"Sucess\" && exit 0"
+        "deploycommands": "node deploy-commands.js",
+        "start": "node index.js"
     },
     "devDependencies": {
-        "eslint": "^7.17.0"
+        "eslint": "^8.31.0"
     }
 }

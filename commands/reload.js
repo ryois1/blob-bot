@@ -1,49 +1,38 @@
-/* eslint-disable no-mixed-spaces-and-tabs */
+const { SlashCommandBuilder, PermissionsBitField } = require('discord.js');
+
 module.exports = {
-	name: 'reload',
-	cooldown: 2,
-	usage: '<command>',
-	description: 'Reloads a command',
-	guildOnly: false,
 	enabled: true,
-	disabledGuilds: ['851802737662099456'],
-	execute(message, args, client, token, config, logger) {
-		if (message.member.hasPermission('ADMINISTRATOR')) {
-			if (!args.length) {
-				return message.reply(
-					'you didn\'t pass any command to reload!',
-				);
+	guildOnly: false,
+	ownerOnly: false,
+	data: new SlashCommandBuilder()
+		.setName('reload')
+		.setDescription('Reloads a command')
+		.addStringOption(option =>
+			option
+				.setName('commandname')
+				.setDescription('filename without .js')
+				.setRequired(true)),
+
+	async execute(interaction) {
+		if (interaction.member.permissions.has(PermissionsBitField.Flags.Administrator)) {
+			const commandName = interaction.options.getString('commandname');
+			const command = interaction.client.commands.get(commandName);
+			if (!command.data) {
+				await interaction.reply({ content: 'There is no command with that name.', ephemeral: true });
 			}
-			const commandName = args[0].toLowerCase();
-			const command =
-        message.client.commands.get(commandName) ||
-        message.client.commands.find(
-        	(cmd) => cmd.aliases && cmd.aliases.includes(commandName),
-        );
-			if (!command) {
-				return message.reply(
-					`there is no command with name or alias \`${commandName}\`!`,
-				);
-			}
-			delete require.cache[require.resolve(`./${command.name}.js`)];
+			delete require.cache[require.resolve(`./${command.data.name}.js`)];
 			try {
-				const newCommand = require(`./${command.name}.js`);
-				message.client.commands.set(newCommand.name, newCommand);
+				const newCommand = require(`./${command.data.name}.js`);
+				interaction.client.commands.set(newCommand.data.name, newCommand);
 			}
 			catch (error) {
-				logger.error(client, error);
-				message.reply(`there was an error while reloading a command \`${command.name}\`:\n\`${error.message}\``);
+				await interaction.reply({ content: `There was an error reloading the command ${command.data.name}.`, ephemeral: true });
+
 			}
-			message.reply(`Command \`${command.name}\` was reloaded!`) .then(msg => {
-				msg.delete({ timeout: 1500 });
-				message.delete({ timeout: 1500 });
-			});
+			await interaction.reply({ content: `Successfully reloaded the command ${command.data.name}.`, ephemeral: true });
 		}
 		else {
-			message.reply('you do not have permission to use this command.') .then(msg => {
-				msg.delete({ timeout: 1500 });
-				message.delete({ timeout: 1500 });
-			});
+			await interaction.reply({ content: 'You do not have permission to use this command.', ephemeral: true });
 		}
 	},
 };
