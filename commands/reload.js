@@ -12,6 +12,7 @@ module.exports = {
 				.setName('commandname')
 				.setDescription('filename without .js')
 				.setRequired(true)),
+
 	async execute(interaction) {
 		if (interaction.member.permissions.has(PermissionsBitField.Flags.Administrator)) {
 			const commandName = interaction.options.getString('commandname');

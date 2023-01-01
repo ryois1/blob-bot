@@ -1,11 +1,13 @@
 const fs = require('node:fs');
 const path = require('node:path');
+const config = process.env;
 const { Client, GatewayIntentBits, Collection } = require('discord.js');
-const token = process.env.DISCORD_TOKEN;
+const token = config.DISCORD_TOKEN;
+const database = require('./database')(config);
 
 // Bot Client Instance
 const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent, GatewayIntentBits.GuildMembers] });
-
+client.db = database;
 
 // Get Events files
 const eventsPath = path.join(__dirname, 'events');
