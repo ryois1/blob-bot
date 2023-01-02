@@ -3,6 +3,7 @@ const { SlashCommandBuilder } = require('discord.js');
 module.exports = {
 	enabled: true,
 	guildOnly: true,
+	globallyEnabled: false,
 	ownerOnly: false,
 	category: 'fun',
 	data: new SlashCommandBuilder()

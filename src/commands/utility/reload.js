@@ -3,6 +3,7 @@ const { SlashCommandBuilder, PermissionsBitField } = require('discord.js');
 module.exports = {
 	enabled: true,
 	guildOnly: false,
+	globallyEnabled: false,
 	ownerOnly: false,
 	category: 'utility',
 	data: new SlashCommandBuilder()

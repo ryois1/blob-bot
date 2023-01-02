@@ -1,9 +1,25 @@
+require('module-alias/register');
+const mysql = require('mysql');
 const { REST, Routes } = require('discord.js');
 const config = process.env;
 const token = config.DISCORD_TOKEN;
 const clientId = config.DISCORD_CLIENT_ID;
 const path = require('node:path');
 const fs = require('node:fs');
+const pool = mysql.createPool({
+	host: config.MYSQL_HOST,
+	user: config.MYSQL_USER,
+	password: config.MYSQL_PASSWORD,
+	database: config.MYSQL_DATABASE,
+	connectionLimit: 10,
+});
+pool.getConnection(function(err) {
+	if (err) {
+		console.error('Error error connecting to database.', err);
+		throw err;
+	}
+	console.log('Connected to database.');
+});
 
 const commands = [];
 
@@ -14,6 +30,7 @@ for (const folder of commandsFolders) {
 	const files = fs.readdirSync(`${commandsPath}/${folder}`);
 	for (const file of files) {
 		const command = require(`${commandsPath}/${folder}/${file}`);
+		pool.query('INSERT INTO commands (command_name, command_category, globally_enabled, guilds_only) VALUES(?,?,?,?) ON DUPLICATE KEY UPDATE globally_enabled=? AND guilds_only=?', [command.data.name, command.category, command.globallyEnabled, command.guildOnly, command.globallyEnabled, command.guildOnly]);
 		commands.push(command.data.toJSON());
 	}
 }
@@ -32,9 +49,11 @@ const rest = new REST({ version: '10' }).setToken(token);
 		);
 
 		console.log(`Successfully reloaded ${data.length} application (/) commands.`);
+		pool.end();
 	}
 	catch (error) {
 		// And of course, make sure you catch and log any errors!
 		console.error(error);
+		pool.end();
 	}
 })();

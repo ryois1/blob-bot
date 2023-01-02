@@ -4,6 +4,7 @@ const axios = require('axios').default;
 module.exports = {
 	enabled: true,
 	guildOnly: false,
+	globallyEnabled: false,
 	ownerOnly: false,
 	category: 'fun',
 	data: new SlashCommandBuilder()
