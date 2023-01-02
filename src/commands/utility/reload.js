@@ -27,8 +27,8 @@ module.exports = class Reload extends Command {
 			await interaction.reply({ content: 'There is no slash command with that name.', ephemeral: true });
 			return;
 		}
-		delete require.cache[require.resolve(`@commands/${command.category}/${command.name}.js`)];
-		const newCommand = require(`@commands/${command.category}/${command.name}.js`);
+		delete require.cache[require.resolve(`@src/commands/${command.category}/${command.name}.js`)];
+		const newCommand = require(`@src/commands/${command.category}/${command.name}.js`);
 		const cmd = new newCommand(interaction.client);
 		interaction.client.commands.set(cmd.name, cmd);
 		interaction.client.logger.log(`Successfully reloaded the command ${command.name}.`);
