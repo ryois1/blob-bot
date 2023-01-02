@@ -1,46 +1,15 @@
+// Required Modules
 require('module-alias/register');
-const fs = require('node:fs');
 const path = require('node:path');
-const config = process.env;
-const { Client, GatewayIntentBits, Collection } = require('discord.js');
-const token = config.DISCORD_TOKEN;
-const database = require('@src/database')(config);
+const token = process.env.DISCORD_TOKEN;
+const { BotClient } = require('@src/structures');
 
-// Bot Client Instance
-const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent, GatewayIntentBits.GuildMembers] });
-client.db = database;
+// New Client Instance
+const client = new BotClient();
 
-// Get Events files
-const eventsPath = path.join(__dirname, 'src/events');
-const eventsFolders = fs.readdirSync(eventsPath);
+// Register Events and Command
+client.loadCommands(path.join(__dirname, 'src/commands'));
+client.loadEvents(path.join(__dirname, 'src/events'));
 
-for (const folder of eventsFolders) {
-	const files = fs.readdirSync(`${eventsPath}/${folder}`);
-	for (const file of files) {
-		const event = require(`${eventsPath}/${folder}/${file}`);
-		if (event.once) {
-			client.once(event.name, (...args) => event.execute(...args, client));
-		}
-		else {
-			client.on(event.name, (...args) => event.execute(...args, client));
-		}
-	}
-}
-// Initalize Command Collection
-client.commands = new Collection();
-
-// Get Commands files
-const commandsPath = path.join(__dirname, 'src/commands');
-const commandsFolders = fs.readdirSync(commandsPath);
-
-for (const folder of commandsFolders) {
-	const files = fs.readdirSync(`${commandsPath}/${folder}`);
-	for (const file of files) {
-		const command = require(`${commandsPath}/${folder}/${file}`);
-		if ('data' in command && 'execute' in command) {
-			client.commands.set(command.data.name, command);
-		}
-	}
-}
-// Log in to Discord with your client's token
+// Login to Discord
 client.login(token);

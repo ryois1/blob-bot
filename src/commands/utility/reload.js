@@ -1,39 +1,37 @@
-const { SlashCommandBuilder, PermissionsBitField } = require('discord.js');
+const { ApplicationCommandOptionType } = require('discord.js');
+const { Command } = require('@src/structures');
 
-module.exports = {
-	enabled: true,
-	guildOnly: false,
-	ownerOnly: false,
-	category: 'utility',
-	data: new SlashCommandBuilder()
-		.setName('reload')
-		.setDescription('Reloads a command')
-		.addStringOption(option =>
-			option
-				.setName('commandname')
-				.setDescription('filename without .js')
-				.setRequired(true)),
-
+module.exports = class Reload extends Command {
+	constructor(client) {
+		super(client, {
+			name: 'reload',
+			description: 'Reloads a command.',
+			category: 'utility',
+			slashCommand: {
+				enabled: true,
+				options: [
+					{
+						name: 'name',
+						description: 'filename without .js',
+						type: ApplicationCommandOptionType.String,
+						required: true,
+					},
+				],
+			},
+		});
+	}
 	async execute(interaction) {
-		if (interaction.member.permissions.has(PermissionsBitField.Flags.Administrator)) {
-			const commandName = interaction.options.getString('commandname');
-			const command = interaction.client.commands.get(commandName);
-			if (!command.data) {
-				await interaction.reply({ content: 'There is no command with that name.', ephemeral: true });
-			}
-			delete require.cache[require.resolve(`@commands/${command.category}/${command.data.name}.js`)];
-			try {
-				const newCommand = require(`@commands/${command.category}/${command.data.name}.js`);
-				interaction.client.commands.set(newCommand.data.name, newCommand);
-			}
-			catch (error) {
-				await interaction.reply({ content: `There was an error reloading the command ${command.data.name}.`, ephemeral: true });
-
-			}
-			await interaction.reply({ content: `Successfully reloaded the command ${command.data.name}.`, ephemeral: true });
+		const commandName = interaction.options.getString('name');
+		const command = interaction.client.commands.get(commandName);
+		if (!command.slashCommand) {
+			await interaction.reply({ content: 'There is no slash command with that name.', ephemeral: true });
+			return;
 		}
-		else {
-			await interaction.reply({ content: 'You do not have permission to use this command.', ephemeral: true });
-		}
-	},
+		delete require.cache[require.resolve(`@src/commands/${command.category}/${command.name}.js`)];
+		const newCommand = require(`@src/commands/${command.category}/${command.name}.js`);
+		const cmd = new newCommand(interaction.client);
+		interaction.client.commands.set(cmd.name, cmd);
+		interaction.client.logger.log(`Successfully reloaded the command ${command.name}.`);
+		await interaction.reply({ content: `Successfully reloaded the command ${command.name}.`, ephemeral: true });
+	}
 };

@@ -1,46 +1,42 @@
-const { SlashCommandBuilder } = require('discord.js');
+const { ApplicationCommandOptionType } = require('discord.js');
+const { Command } = require('@src/structures');
 
-module.exports = {
-	enabled: true,
-	guildOnly: true,
-	ownerOnly: false,
-	category: 'fun',
-	data: new SlashCommandBuilder()
-		.setName('namecolor')
-		.setDescription('Specify a hex color for your name!')
-		.addStringOption(option =>
-			option
-				.setName('hex')
-				.setDescription('Hex Color for Role')
-				.setRequired(true)),
-
+module.exports = class NameColor extends Command {
+	constructor(client) {
+		super(client, {
+			name: 'namecolor',
+			description: 'Specify a hex color for your name!',
+			category: 'fun',
+			slashCommand: {
+				enabled: true,
+				options: [
+					{
+						name: 'hex',
+						description: 'Hex Color for Role',
+						type: ApplicationCommandOptionType.String,
+						required: true,
+					},
+				],
+			},
+		});
+	}
 	async execute(interaction) {
 		const hex = interaction.options.getString('hex');
 		const guild = interaction.guild;
 		const roleName = `${interaction.user.id}`;
 		const role = interaction.guild.roles.cache.find(x => x.name == roleName);
 		if (!role) {
-			try {
-				guild.roles.create({
-					data: {
-						name: `${interaction.user.id}`,
-						color: `${hex}`,
-					},
-				}).then((userRole) => interaction.user.roles.add(userRole))
-					.catch((error) => {
-						// logger.error(client, error);
-						interaction.reply({ content: `Failed to update role: ${error}`, ephemeral: true });
-					});
-			}
-			catch (error) {
-				// logger.error(client, error);
-				interaction.reply({ content: `Failed to update role: ${error}`, ephemeral: true });
-			}
+			guild.roles.create({
+				data: {
+					name: `${interaction.user.id}`,
+					color: `${hex}`,
+				},
+			}).then((userRole) => interaction.user.roles.add(userRole));
 		}
 		else {
 			role.setColor(hex);
 		}
 
 		await interaction.reply({ content: `Changed your name's color to ${hex}!`, ephemeral: true });
-	},
+	}
 };
