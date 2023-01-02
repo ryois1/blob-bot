@@ -1,7 +1,7 @@
 const { EmbedBuilder } = require('discord.js');
 const axios = require('axios').default;
 // Import base command
-const Command = require('@src/classes/Command');
+const Command = require('@src/structure/Command');
 module.exports = class Pug extends Command {
 	constructor(client) {
 		super(client, {

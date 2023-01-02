@@ -1,5 +1,5 @@
 // Import base command
-const Command = require('@src/classes/Command');
+const Command = require('@src/structure/Command');
 module.exports = class Ping extends Command {
 	constructor(client) {
 		super(client, {
