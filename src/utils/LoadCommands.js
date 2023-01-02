@@ -8,9 +8,10 @@ module.exports = async (directory, client) => {
 		const files = fs.readdirSync(`${directory}/${folder}`);
 		for (const file of files) {
 			const command = require(`${directory}/${folder}/${file}`);
-			if ('data' in command && 'execute' in command) {
-				client.logger.log(`Loaded command "${command.data.name}"`);
-				client.commands.set(command.data.name, command);
+			const cmd = new command(client);
+			if (cmd.slashCommand?.enabled) {
+				client.logger.log(`Loaded command "${cmd.name}"`);
+				client.commands.set(cmd.name, cmd);
 			}
 		}
 	}

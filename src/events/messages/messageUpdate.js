@@ -3,6 +3,8 @@ const { Events, EmbedBuilder } = require('discord.js');
 module.exports = {
 	name: Events.MessageUpdate,
 	async execute(oldMessage, newMessage, client) {
+		if (oldMessage.partial) return;
+		if (oldMessage.author.bot || !oldMessage.guild) return;
 		if (oldMessage.embeds.length > 0) {
 			return;
 		}

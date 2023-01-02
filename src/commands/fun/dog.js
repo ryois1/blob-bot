@@ -1,16 +1,18 @@
-const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
+const { EmbedBuilder } = require('discord.js');
 const axios = require('axios').default;
-
-module.exports = {
-	enabled: true,
-	guildOnly: false,
-	globallyEnabled: false,
-	ownerOnly: false,
-	category: 'fun',
-	data: new SlashCommandBuilder()
-		.setName('dog')
-		.setDescription('Finds a cute dog picture!'),
-
+// Import base command
+const Command = require('@src/classes/Command');
+module.exports = class Ping extends Command {
+	constructor(client) {
+		super(client, {
+			name: 'dog',
+			description: 'Finds a cute dog picture!',
+			category: 'fun',
+			slashCommand: {
+				enabled: true,
+			},
+		});
+	}
 	async execute(interaction) {
 		const res = await axios.get('https://api.thedogapi.com/v1/images/search', {
 			headers: {
@@ -22,5 +24,5 @@ module.exports = {
 			.setTitle('🐶 Here is your dog!')
 			.setImage(res.data[0].url);
 		await interaction.reply({ embeds: [dogEmbed] });
-	},
+	}
 };

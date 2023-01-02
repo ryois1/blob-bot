@@ -1,20 +1,24 @@
-const { SlashCommandBuilder } = require('discord.js');
-
-module.exports = {
-	enabled: true,
-	guildOnly: true,
-	globallyEnabled: false,
-	ownerOnly: false,
-	category: 'fun',
-	data: new SlashCommandBuilder()
-		.setName('namecolor')
-		.setDescription('Specify a hex color for your name!')
-		.addStringOption(option =>
-			option
-				.setName('hex')
-				.setDescription('Hex Color for Role')
-				.setRequired(true)),
-
+// Import base command
+const Command = require('@src/classes/Command');
+module.exports = class Ping extends Command {
+	constructor(client) {
+		super(client, {
+			name: 'namecolor',
+			description: 'Specify a hex color for your name!',
+			category: 'fun',
+			slashCommand: {
+				enabled: true,
+				options: [
+					{
+						name: 'hex',
+						description: 'Hex Color for Role',
+						type: 'STRING',
+						required: true,
+					},
+				],
+			},
+		});
+	}
 	async execute(interaction) {
 		const hex = interaction.options.getString('hex');
 		const guild = interaction.guild;
@@ -33,5 +37,5 @@ module.exports = {
 		}
 
 		await interaction.reply({ content: `Changed your name's color to ${hex}!`, ephemeral: true });
-	},
+	}
 };

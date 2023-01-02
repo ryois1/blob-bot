@@ -1,21 +1,24 @@
-const { SlashCommandBuilder, PermissionsBitField } = require('discord.js');
-
-module.exports = {
-	enabled: true,
-	guildOnly: false,
-	globallyEnabled: false,
-	ownerOnly: false,
-	category: 'utility',
-	data: new SlashCommandBuilder()
-		.setName('reload')
-		.setDescription('Reloads a command')
-		.setDefaultMemberPermissions(PermissionsBitField.Flags.Administrator)
-		.addStringOption(option =>
-			option
-				.setName('name')
-				.setDescription('filename without .js')
-				.setRequired(true)),
-
+// Import base command
+const Command = require('@src/classes/Command');
+module.exports = class Ping extends Command {
+	constructor(client) {
+		super(client, {
+			name: 'reload',
+			description: 'Reloads a command.',
+			category: 'utility',
+			slashCommand: {
+				enabled: true,
+				options: [
+					{
+						name: 'name',
+						description: 'filename without .js',
+						type: 'STRING',
+						required: true,
+					},
+				],
+			},
+		});
+	}
 	async execute(interaction) {
 		const commandName = interaction.options.getString('name');
 		const command = interaction.client.commands.get(commandName);
@@ -27,5 +30,5 @@ module.exports = {
 		interaction.client.commands.set(newCommand.data.name, newCommand);
 
 		await interaction.reply({ content: `Successfully reloaded the command ${command.data.name}.`, ephemeral: true });
-	},
+	}
 };

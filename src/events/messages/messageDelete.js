@@ -3,6 +3,8 @@ const { Events, EmbedBuilder } = require('discord.js');
 module.exports = {
 	name: Events.MessageDelete,
 	async execute(message, client) {
+		if (message.partial) return;
+		if (message.author.bot || !message.guild) return;
 		const channel = await new Promise((resolve) => {
 			client.db.query('SELECT setting_value FROM server_settings WHERE server_id = ? AND setting_name = \'action_log_channel_id\' LIMIT 1', [message.guild.id], async function(error, result) {
 				if (error) client.logger.error(error);

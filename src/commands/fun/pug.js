@@ -1,16 +1,18 @@
-const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
+const { EmbedBuilder } = require('discord.js');
 const axios = require('axios').default;
-
-module.exports = {
-	enabled: true,
-	guildOnly: false,
-	globallyEnabled: false,
-	ownerOnly: false,
-	category: 'fun',
-	data: new SlashCommandBuilder()
-		.setName('pug')
-		.setDescription('Finds a cute pug picture!'),
-
+// Import base command
+const Command = require('@src/classes/Command');
+module.exports = class Ping extends Command {
+	constructor(client) {
+		super(client, {
+			name: 'pug',
+			description: 'Finds a cute pug picture!',
+			category: 'fun',
+			slashCommand: {
+				enabled: true,
+			},
+		});
+	}
 	async execute(interaction) {
 		const res = await axios.get('https://dog.ceo/api/breed/pug/images/random');
 		const pugEmbed = new EmbedBuilder()
@@ -18,5 +20,5 @@ module.exports = {
 			.setTitle('🐶 Here is your pug!')
 			.setImage(res.data.message);
 		await interaction.reply({ embeds: [pugEmbed] });
-	},
+	}
 };
