@@ -5,8 +5,8 @@ const { Client, REST, Routes, GatewayIntentBits } = require('discord.js');
 const config = process.env;
 const token = config.DISCORD_TOKEN;
 const clientId = config.DISCORD_CLIENT_ID;
-const path = require('node:path');
-const fs = require('node:fs');
+const path = require('path');
+const fs = require('fs');
 const pool = mysql.createPool({
 	host: config.MYSQL_HOST,
 	user: config.MYSQL_USER,

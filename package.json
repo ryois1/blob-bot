@@ -23,8 +23,7 @@
         "start": "node index.js"
     },
     "devDependencies": {
-        "eslint": "^8.31.0",
-        "ts-migrate": "^0.1.35"
+        "eslint": "^8.31.0"
     },
     "_moduleAliases": {
         "@root": ".",

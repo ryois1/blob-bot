@@ -1,6 +1,6 @@
 // Import base command
 const { ApplicationCommandOptionType } = require('discord.js');
-const Command = require('@src/structure/Command');
+const Command = require('@src/structures/Command');
 module.exports = class Reload extends Command {
 	constructor(client) {
 		super(client, {

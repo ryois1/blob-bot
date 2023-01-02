@@ -1,9 +1,15 @@
 const { inspect } = require('util');
+const fs = require('fs');
+
 const { EmbedBuilder, WebhookClient } = require('discord.js'),
 	chalk = require('chalk'),
 	moment = require('moment'),
 	nodeLogger = require('simple-node-logger'),
 	config = require('@root/config');
+
+if (!fs.existsSync('./logs')) {
+	fs.mkdirSync('./logs');
+}
 
 const simpleLogger = nodeLogger.createRollingFileLogger({
 	logDirectory: './logs',
