@@ -9,6 +9,7 @@ module.exports = async (directory, client) => {
 		for (const file of files) {
 			const command = require(`${directory}/${folder}/${file}`);
 			if ('data' in command && 'execute' in command) {
+				client.logger.log(`Loaded command "${command.data.name}"`);
 				client.commands.set(command.data.name, command);
 			}
 		}

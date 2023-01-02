@@ -10,7 +10,7 @@ module.exports = {
 			});
 		});
 		const deleteEmbed = new EmbedBuilder()
-			.setColor(0xFF470F)
+			.setColor(client.config.EMBED_COLORS.ERROR)
 			.setAuthor({ name: `${channel.guild.name}`, iconURL: channel.guild.iconURL({ dynamic: true }) })
 			.setDescription(`**Bulk delete in <#${channel.id}>, ${messages.size} messages deleted**`)
 			.setTimestamp();

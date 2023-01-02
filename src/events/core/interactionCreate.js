@@ -7,7 +7,8 @@ module.exports = {
 		return new Promise((resolve) => {
 			if (!command.enabled) resolve([false, 'command is gobally disabled']);
 			if (command.ownerOnly) {
-				if (interaction.author.id != '236237361703288842') resolve([false, 'command is only available to the bot owner.']);
+				if (interaction.client.config.OWNER_IDS.includes(interaction.user.id)) resolve([true]);
+				else resolve([false, 'command is only available to the bot owner.']);
 			}
 			if (interaction.guildId == null) resolve([true]);
 			interaction.client.db.query('SELECT status FROM commands_guilds WHERE command_name = ? AND guild_id = ?', [interaction.commandName, interaction.guild.id], async function(error, result) {
@@ -36,9 +37,9 @@ module.exports = {
 			try {
 				await command.execute(interaction);
 			}
-			catch (errorCmd) {
+			catch (error) {
 				await interaction.reply({ content: 'There was an error executing the command.', ephemeral: true });
-				interaction.client.logger.error(`Error executing ${interaction.commandName}`, errorCmd);
+				interaction.client.logger.error(`Error executing ${interaction.commandName}`, error);
 			}
 		}
 		else {

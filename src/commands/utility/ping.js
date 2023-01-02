@@ -11,6 +11,6 @@ module.exports = {
 
 	async execute(interaction) {
 		const sent = await interaction.reply({ content: 'Pinging...', fetchReply: true });
-		interaction.editReply(`Pong 🏓! Latency is ${sent.createdTimestamp - interaction.createdTimestamp}ms.`);
+		interaction.editReply(`Pong 🏓! WebSocket Latency: ${interaction.client.ws.ping}ms. Round Trip Latency is ${sent.createdTimestamp - interaction.createdTimestamp}ms.`);
 	},
 };

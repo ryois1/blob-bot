@@ -7,9 +7,11 @@ module.exports = async (directory, client) => {
 		for (const file of files) {
 			const event = require(`${directory}/${folder}/${file}`);
 			if (event.once) {
+				client.logger.log(`Loaded one time event "${event.name}"`);
 				client.once(event.name, (...args) => event.execute(...args, client));
 			}
 			else {
+				client.logger.log(`Loaded event "${event.name}"`);
 				client.on(event.name, (...args) => event.execute(...args, client));
 			}
 		}

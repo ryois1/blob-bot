@@ -1,5 +1,5 @@
 module.exports = {
-	OWNER_IDS: [],
+	OWNER_IDS: ['236237361703288842'],
 	EMBED_COLORS: {
 		BOT_EMBED: '#068ADD',
 		TRANSPARENT: '#36393F',

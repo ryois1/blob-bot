@@ -11,7 +11,7 @@ module.exports = {
 		});
 		const user = await client.users.fetch(message.author.id);
 		const deleteEmbed = new EmbedBuilder()
-			.setColor(0xFF470F)
+			.setColor(client.config.EMBED_COLORS.ERROR)
 			.setAuthor({ name: `${user.tag}`, iconURL: user.displayAvatarURL({ dynamic: true }) })
 			.setDescription(`**Message sent by <@${user.id}> Deleted in <#${message.channelId}>**\n${message.content}`)
 			.setTimestamp()
