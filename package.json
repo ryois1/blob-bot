@@ -7,9 +7,13 @@
     "author": "Ryois",
     "license": "GNU GPLv3",
     "dependencies": {
+        "chalk": "4.1.2",
         "discord.js": "^14.7.1",
         "module-alias": "^2.2.2",
-        "mysql": "^2.18.1"
+        "moment": "^2.29.4",
+        "mysql": "^2.18.1",
+        "simple-node-logger": "^21.8.12",
+        "util": "^0.12.5"
     },
     "scripts": {
         "deploycommands": "node deploy-commands.js",
@@ -21,6 +25,7 @@
     "_moduleAliases": {
         "@root": ".",
         "@src": "src/",
+        "@utils": "src/utils",
         "@commands": "src/commands/",
         "@events": "src/events/"
     }

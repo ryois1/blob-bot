@@ -22,14 +22,8 @@ module.exports = {
 				await interaction.reply({ content: 'There is no command with that name.', ephemeral: true });
 			}
 			delete require.cache[require.resolve(`@commands/${command.category}/${command.data.name}.js`)];
-			try {
-				const newCommand = require(`@commands/${command.category}/${command.data.name}.js`);
-				interaction.client.commands.set(newCommand.data.name, newCommand);
-			}
-			catch (error) {
-				await interaction.reply({ content: `There was an error reloading the command ${command.data.name}.`, ephemeral: true });
-
-			}
+			const newCommand = require(`@commands/${command.category}/${command.data.name}.js`);
+			interaction.client.commands.set(newCommand.data.name, newCommand);
 			await interaction.reply({ content: `Successfully reloaded the command ${command.data.name}.`, ephemeral: true });
 		}
 		else {

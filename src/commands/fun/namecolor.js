@@ -20,22 +20,12 @@ module.exports = {
 		const roleName = `${interaction.user.id}`;
 		const role = interaction.guild.roles.cache.find(x => x.name == roleName);
 		if (!role) {
-			try {
-				guild.roles.create({
-					data: {
-						name: `${interaction.user.id}`,
-						color: `${hex}`,
-					},
-				}).then((userRole) => interaction.user.roles.add(userRole))
-					.catch((error) => {
-						// logger.error(client, error);
-						interaction.reply({ content: `Failed to update role: ${error}`, ephemeral: true });
-					});
-			}
-			catch (error) {
-				// logger.error(client, error);
-				interaction.reply({ content: `Failed to update role: ${error}`, ephemeral: true });
-			}
+			guild.roles.create({
+				data: {
+					name: `${interaction.user.id}`,
+					color: `${hex}`,
+				},
+			}).then((userRole) => interaction.user.roles.add(userRole));
 		}
 		else {
 			role.setColor(hex);

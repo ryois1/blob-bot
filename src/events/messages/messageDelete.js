@@ -5,7 +5,7 @@ module.exports = {
 	async execute(message, client) {
 		const channel = await new Promise((resolve) => {
 			client.db.query('SELECT setting_value FROM server_settings WHERE server_id = ? AND setting_name = \'action_log_channel_id\' LIMIT 1', [message.guild.id], async function(error, result) {
-				if (error) console.error (error);
+				if (error) client.logger.error(error);
 				if (result.length) resolve(client.channels.cache.get(result[0].setting_value));
 			});
 		});

@@ -11,7 +11,7 @@ module.exports = {
 			}
 			if (interaction.guildId == null) resolve([true]);
 			interaction.client.db.query('SELECT status FROM commands_guilds WHERE command_name = ? AND guild_id = ?', [interaction.commandName, interaction.guild.id], async function(error, result) {
-				if (error) console.error(error);
+				if (error) interaction.client.logger.error(error);
 				if (result.length > 0) {
 					if (result[0].status) resolve([true]);
 					else resolve([false, 'command is disabled for this server']);
@@ -27,7 +27,7 @@ module.exports = {
 
 		if (!command) {
 			await interaction.reply({ content: 'No command found.', ephemeral: true });
-			console.error(`No command matching ${interaction.commandName} was found.`);
+			interaction.client.logger.error(`No command matching ${interaction.commandName} was found.`);
 			return;
 		}
 
@@ -38,8 +38,7 @@ module.exports = {
 			}
 			catch (errorCmd) {
 				await interaction.reply({ content: 'There was an error executing the command.', ephemeral: true });
-				console.error(`Error executing ${interaction.commandName}`);
-				console.error(errorCmd);
+				interaction.client.logger.error(`Error executing ${interaction.commandName}`, errorCmd);
 			}
 		}
 		else {

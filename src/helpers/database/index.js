@@ -1,5 +1,6 @@
-module.exports = function(config) {
-	const mysql = require('mysql');
+const mysql = require('mysql');
+
+module.exports = (config, client) => {
 	const pool = mysql.createPool({
 		host: config.MYSQL_HOST,
 		user: config.MYSQL_USER,
@@ -8,8 +9,11 @@ module.exports = function(config) {
 		connectionLimit: 10,
 	});
 	pool.getConnection(function(err) {
-		if (err) throw err;
-		console.log('Connected to database.');
+		if (err) {
+			client.logger.error('Error error connecting to database.', err);
+			throw err;
+		}
+		client.logger.log('Connected to database.');
 	});
 	return pool;
 };
