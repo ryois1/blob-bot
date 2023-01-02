@@ -39,6 +39,7 @@ module.exports = {
 			catch (error) {
 				await interaction.reply({ content: 'There was an error executing the command.', ephemeral: true });
 				interaction.client.logger.error(`Error executing ${interaction.commandName}`, error);
+				return;
 			}
 		}
 		else {

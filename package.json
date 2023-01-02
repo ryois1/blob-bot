@@ -1,6 +1,6 @@
 {
     "name": "blobbot",
-    "version": "2.1.6",
+    "version": "2.1.7",
     "description": "A Discord bot!",
     "main": "index.js",
     "keywords": [],
