@@ -1,6 +1,7 @@
 require('module-alias/register');
 const mysql = require('mysql');
-const { REST, Routes } = require('discord.js');
+const { Client, REST, Routes, GatewayIntentBits } = require('discord.js');
+
 const config = process.env;
 const token = config.DISCORD_TOKEN;
 const clientId = config.DISCORD_CLIENT_ID;
@@ -20,6 +21,7 @@ pool.getConnection(function(err) {
 	}
 	console.log('Connected to database.');
 });
+const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
 const commands = [];
 
@@ -30,8 +32,9 @@ for (const folder of commandsFolders) {
 	const files = fs.readdirSync(`${commandsPath}/${folder}`);
 	for (const file of files) {
 		const command = require(`${commandsPath}/${folder}/${file}`);
-		pool.query('INSERT INTO commands (command_name, command_category, globally_enabled, guilds_only) VALUES(?,?,?,?) ON DUPLICATE KEY UPDATE globally_enabled=? AND guilds_only=?', [command.data.name, command.category, command.globallyEnabled, command.guildOnly, command.globallyEnabled, command.guildOnly]);
-		commands.push(command.data.toJSON());
+		const cmd = new command(client);
+		pool.query('INSERT INTO commands (command_name, command_category, globally_enabled, guilds_only) VALUES(?,?,?,?) ON DUPLICATE KEY UPDATE globally_enabled=? AND guilds_only=?', [cmd.name, cmd.category, cmd.globallyEnabled, cmd.guildOnly, cmd.globallyEnabled, cmd.guildOnly]);
+		commands.push(cmd.toJSON());
 	}
 }
 
@@ -41,7 +44,6 @@ const rest = new REST({ version: '10' }).setToken(token);
 (async () => {
 	try {
 		console.log(`Started refreshing ${commands.length} application (/) commands.`);
-
 		// The put method is used to fully refresh all commands in the guild with the current set
 		const data = await rest.put(
 			Routes.applicationCommands(clientId),

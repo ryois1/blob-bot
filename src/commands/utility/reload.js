@@ -1,6 +1,7 @@
 // Import base command
+const { ApplicationCommandOptionType } = require('discord.js');
 const Command = require('@src/classes/Command');
-module.exports = class Ping extends Command {
+module.exports = class Reload extends Command {
 	constructor(client) {
 		super(client, {
 			name: 'reload',
@@ -12,7 +13,7 @@ module.exports = class Ping extends Command {
 					{
 						name: 'name',
 						description: 'filename without .js',
-						type: 'STRING',
+						type: ApplicationCommandOptionType.String,
 						required: true,
 					},
 				],
@@ -22,13 +23,15 @@ module.exports = class Ping extends Command {
 	async execute(interaction) {
 		const commandName = interaction.options.getString('name');
 		const command = interaction.client.commands.get(commandName);
-		if (!command.data) {
-			await interaction.reply({ content: 'There is no command with that name.', ephemeral: true });
+		if (!command.slashCommand) {
+			await interaction.reply({ content: 'There is no slash command with that name.', ephemeral: true });
+			return;
 		}
-		delete require.cache[require.resolve(`@commands/${command.category}/${command.data.name}.js`)];
-		const newCommand = require(`@commands/${command.category}/${command.data.name}.js`);
-		interaction.client.commands.set(newCommand.data.name, newCommand);
-
-		await interaction.reply({ content: `Successfully reloaded the command ${command.data.name}.`, ephemeral: true });
+		delete require.cache[require.resolve(`@commands/${command.category}/${command.name}.js`)];
+		const newCommand = require(`@commands/${command.category}/${command.name}.js`);
+		const cmd = new newCommand(interaction.client);
+		interaction.client.commands.set(cmd.name, cmd);
+		interaction.client.logger.log(`Successfully reloaded the command ${command.name}.`);
+		await interaction.reply({ content: `Successfully reloaded the command ${command.name}.`, ephemeral: true });
 	}
 };

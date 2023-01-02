@@ -2,7 +2,7 @@ const { EmbedBuilder } = require('discord.js');
 const axios = require('axios').default;
 // Import base command
 const Command = require('@src/classes/Command');
-module.exports = class Ping extends Command {
+module.exports = class Cat extends Command {
 	constructor(client) {
 		super(client, {
 			name: 'cat',

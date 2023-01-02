@@ -1,6 +1,8 @@
+const { ApplicationCommandOptionType } = require('discord.js');
+
 // Import base command
 const Command = require('@src/classes/Command');
-module.exports = class Ping extends Command {
+module.exports = class Avatar extends Command {
 	constructor(client) {
 		super(client, {
 			name: 'avatar',
@@ -13,7 +15,7 @@ module.exports = class Ping extends Command {
 					{
 						name: 'url',
 						description: 'Publicly accessible image URL',
-						type: 'STRING',
+						type: ApplicationCommandOptionType.String,
 						required: true,
 					},
 				],
@@ -22,6 +24,7 @@ module.exports = class Ping extends Command {
 	}
 	async execute(interaction) {
 		interaction.client.user.setAvatar(interaction.options.getString('url'));
+		interaction.client.logger.log(`Successfully set the avatar of the bot to ${interaction.options.getString('url')}.`);
 		await interaction.reply({ content: 'Successfully set the avatar of the bot', ephemeral: true });
 	}
 };

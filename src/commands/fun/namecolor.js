@@ -1,6 +1,8 @@
+const { ApplicationCommandOptionType } = require('discord.js');
+
 // Import base command
 const Command = require('@src/classes/Command');
-module.exports = class Ping extends Command {
+module.exports = class NameColor extends Command {
 	constructor(client) {
 		super(client, {
 			name: 'namecolor',
@@ -12,7 +14,7 @@ module.exports = class Ping extends Command {
 					{
 						name: 'hex',
 						description: 'Hex Color for Role',
-						type: 'STRING',
+						type: ApplicationCommandOptionType.String,
 						required: true,
 					},
 				],
