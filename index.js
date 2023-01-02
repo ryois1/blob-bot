@@ -7,7 +7,6 @@ const { BotClient } = require('@src/structures');
 // New Client Instance
 const client = new BotClient();
 
-// Give Client Instance Database
 // Register Events and Command
 client.loadCommands(path.join(__dirname, 'src/commands'));
 client.loadEvents(path.join(__dirname, 'src/events'));

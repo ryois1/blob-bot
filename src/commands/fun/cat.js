@@ -1,7 +1,6 @@
 const { EmbedBuilder } = require('discord.js');
-const axios = require('axios').default;
-// Import base command
-const Command = require('@src/structures/Command');
+const { Command } = require('@src/structures');
+
 module.exports = class Cat extends Command {
 	constructor(client) {
 		super(client, {
@@ -14,7 +13,7 @@ module.exports = class Cat extends Command {
 		});
 	}
 	async execute(interaction) {
-		const res = await axios.get('https://api.thecatapi.com/v1/images/search', {
+		const res = await interaction.client.axios.get('https://api.thecatapi.com/v1/images/search', {
 			headers: {
 				'x-api-key' : process.env.THAT_API_CO_KEY,
 			},

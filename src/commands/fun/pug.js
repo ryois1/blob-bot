@@ -1,7 +1,6 @@
 const { EmbedBuilder } = require('discord.js');
-const axios = require('axios').default;
-// Import base command
-const Command = require('@src/structures/Command');
+const { Command } = require('@src/structures');
+
 module.exports = class Pug extends Command {
 	constructor(client) {
 		super(client, {
@@ -14,7 +13,7 @@ module.exports = class Pug extends Command {
 		});
 	}
 	async execute(interaction) {
-		const res = await axios.get('https://dog.ceo/api/breed/pug/images/random');
+		const res = await interaction.client.axios.get('https://dog.ceo/api/breed/pug/images/random');
 		const pugEmbed = new EmbedBuilder()
 			.setColor(interaction.client.config.EMBED_COLORS.BOT_EMBED)
 			.setTitle('🐶 Here is your pug!')

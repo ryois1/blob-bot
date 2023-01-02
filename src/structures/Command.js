@@ -49,6 +49,8 @@ class Command {
 		}
 
 	}
+
+	// Overrides default toJSON for Discord Application Command Ingest
 	toJSON() {
 		return {
 			name: this.name,

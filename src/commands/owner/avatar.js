@@ -1,7 +1,6 @@
 const { ApplicationCommandOptionType } = require('discord.js');
+const { Command } = require('@src/structures');
 
-// Import base command
-const Command = require('@src/structures/Command');
 module.exports = class Avatar extends Command {
 	constructor(client) {
 		super(client, {

@@ -20,7 +20,12 @@ module.exports = class BotClient extends Client {
 
 		// Database
 		this.db = require('@src/helpers/database')(process.env, this);
+
+		// Axios
+		this.axios = require('axios').default;
 	}
+
+	// Loads Commands for Bot
 	async loadCommands(directory) {
 		this.commands = new Collection();
 		const commandsFolders = fs.readdirSync(directory);
@@ -37,6 +42,7 @@ module.exports = class BotClient extends Client {
 		}
 	}
 
+	// Loads Events for Bot
 	async loadEvents(directory) {
 		const eventsFolders = fs.readdirSync(directory);
 		for (const folder of eventsFolders) {
