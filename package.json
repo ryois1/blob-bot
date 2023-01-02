@@ -1,6 +1,6 @@
 {
     "name": "blobbot",
-    "version": "2.1.0",
+    "version": "2.1.6",
     "description": "A Discord bot!",
     "main": "index.js",
     "keywords": [],
@@ -26,9 +26,6 @@
     },
     "_moduleAliases": {
         "@root": ".",
-        "@src": "src/",
-        "@utils": "src/utils",
-        "@commands": "src/commands/",
-        "@events": "src/events/"
+        "@src": "src/"
     }
 }
