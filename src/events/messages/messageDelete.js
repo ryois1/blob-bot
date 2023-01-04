@@ -14,7 +14,6 @@ module.exports = {
 		});
 		const user = await client.users.fetch(message.author.id);
 		const responseData = {
-			title: 'Pong 🏓!',
 			color: 'ERROR',
 			author: { name: `${user.tag}`, iconURL: user.displayAvatarURL({ dynamic: true }) },
 			description: `**Message sent by <@${user.id}> Deleted in <#${message.channelId}>**\n${message.content}`,

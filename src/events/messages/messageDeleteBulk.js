@@ -11,7 +11,6 @@ module.exports = {
 			});
 		});
 		const responseData = {
-			title: 'Pong 🏓!',
 			color: 'ERROR',
 			author: { name: `${channel.guild.name}`, iconURL: channel.guild.iconURL({ dynamic: true }) },
 			description: `**Bulk delete in <#${channel.id}>, ${messages.size} messages deleted**`,
