@@ -40,7 +40,7 @@ class Command {
 	async isCommandEnabled(interaction) {
 		return new Promise((resolve) => {
 			if (interaction.guildId == null) resolve([true]);
-			interaction.client.db.query('SELECT status FROM commands_guilds WHERE command_name = ? AND guild_id = ?', [interaction.commandName, interaction.guild.id], async function(error, result) {
+			interaction.client.db.query('SELECT status FROM commands_guilds WHERE command_name = ? AND guild_id = ?', [interaction.commandName, interaction.guildId], async function(error, result) {
 				if (error) interaction.client.logger.error(error);
 				if (result.length > 0) {
 					if (result[0].status) resolve([true]);
@@ -74,9 +74,9 @@ class Command {
 
 		const isEnabled = await this.isCommandEnabled(interaction);
 		// Disabled commands
-		if (isEnabled[0]) {
+		if (!isEnabled[0]) {
 			return interaction.reply({
-				content: `This ${isEnabled[1]}.`,
+				content: `This ${isEnabled[1]}`,
 				ephemeral: true,
 			});
 		}

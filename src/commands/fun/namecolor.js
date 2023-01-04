@@ -22,7 +22,10 @@ module.exports = class NameColor extends Command {
 		});
 	}
 	async execute(interaction) {
+		console.log(interaction.member.guild);
 		const hex = interaction.options.getString('hex');
+		const member = interaction.member.guild.members.resolve(interaction.user.id);
+		console.log(member);
 		const regex = new RegExp(/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/);
 		if (hex == null) {
 			const responseData = {
@@ -34,15 +37,16 @@ module.exports = class NameColor extends Command {
 		}
 		if (regex.test(hex) == true) {
 			const guild = interaction.guild;
-			const roleName = `${interaction.user.id}`;
+			const roleName = member.user.id;
 			const role = interaction.guild.roles.cache.find(x => x.name == roleName);
 			if (!role) {
 				guild.roles.create({
-					data: {
-						name: `${interaction.user.id}`,
-						color: `${hex}`,
-					},
-				}).then((userRole) => interaction.user.roles.add(userRole));
+					name: `${interaction.user.id}`,
+					color: `${hex}`,
+				}).then((userRole) => {
+					console.log(userRole);
+					member.roles.add(userRole);
+				});
 			}
 			else {
 				role.setColor(hex);
