@@ -1,0 +1,102 @@
+{
+    "messages": [
+        {
+            "content": "I'm not the impostor, u really think my fat juicy ass could fit through the vent?",
+            "is_game": false
+        },
+        {
+            "content": "$user_sus sus",
+            "is_game": false
+        },
+        {
+            "content": "idk that sounds kinda sus. list your tasks $color",
+            "is_game": false
+        },
+        {
+            "content": "i was killing the impostor",
+            "is_game": false
+        },
+        {
+            "content": "I was cleaning the vents",
+            "is_game": false
+        },
+        {
+            "content": "I saw $user_sus vent",
+            "is_game": false
+        },
+        {
+            "content": "byeeee $user_sus",
+            "is_game": false
+        },
+        {
+            "content": "I was doing lights",
+            "is_game": false
+        },
+        {
+            "content": "$user_sus was faking their tasks",
+            "is_game": false
+        },
+        {
+            "content": "Don't mistake me for $user_sus",
+            "is_game": false
+        },
+        {
+            "content": "Did anyone see $color last turn?",
+            "is_game": false
+        },
+        {
+            "content": "I was on cams and saw $user_sus vent",
+            "is_game": false
+        },
+        {
+            "content": "I was on cams and saw $user_sus kill $user_killed near $place",
+            "is_game": false
+        },
+        {
+            "content": "$user_sus was venting, i fucking saw him I swear",
+            "is_game": false
+        },
+        {
+            "content": " 　.　　      。　        ඞ   。　    .    •\n•         $user_sus was not an Impostor.     .　 。　.\n　　。　　 2 Impostors remain.　　.　 。",
+            "is_game": true
+        },
+        {
+            "content": " 　.　　      。　        ඞ   。　    .    •\n•         $user_sus was an Impostor.     .　 。　.\n　　。　　 1 Impostor remains.　　.　 。",
+            "is_game": true
+        },
+        {
+            "content": " 　.　　      。　        ඞ   。　    .    •\n•         $user_sus was an Impostor.     .　 。　.\n　　。　　 0 Impostors remains.　　.　 。",
+            "is_game": true
+        }
+    ],
+    "places": [
+        "Upper Engine",
+        "Reactor",
+        "Security",
+        "Lower Engine",
+        "Electrical",
+        "MedBay",
+        "Storage",
+        "Cafeteria",
+        "Admin",
+        "Weapons",
+        "O2",
+        "Navigation",
+        "Shields",
+        "Communications"
+    ],
+    "colors": [
+        "red",
+        "blue",
+        "green",
+        "pink",
+        "orange",
+        "yellow",
+        "black",
+        "white",
+        "purple",
+        "brown",
+        "cyan",
+        "lime"
+    ]
+}

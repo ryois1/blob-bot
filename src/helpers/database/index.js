@@ -13,7 +13,7 @@ module.exports = (config, client) => {
 			client.logger.error('Error error connecting to database.', err);
 			throw err;
 		}
-		client.logger.log('Connected to database.');
+		client.logger.success('Connected to database.');
 	});
 	return pool;
 };
