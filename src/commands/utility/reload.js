@@ -31,7 +31,7 @@ module.exports = class Reload extends Command {
 		const newCommand = require(`@src/commands/${command.category}/${command.name}.js`);
 		const cmd = new newCommand(interaction.client);
 		interaction.client.commands.set(cmd.name, cmd);
-		interaction.client.logger.log(`Successfully reloaded the command ${command.name}.`);
-		await interaction.reply({ content: `Successfully reloaded the command ${command.name}.`, ephemeral: true });
+		interaction.client.logger.log(`Successfully reloaded the command "${command.name}".`);
+		await interaction.reply({ content: `Successfully reloaded the command "${command.name}".`, ephemeral: true });
 	}
 };

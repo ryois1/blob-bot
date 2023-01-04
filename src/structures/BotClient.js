@@ -1,6 +1,6 @@
 const { Client, Collection, GatewayIntentBits } = require('discord.js');
 const logger = require('@src/helpers/logger');
-const fs = require('fs');
+const fs = require('node:fs');
 
 module.exports = class BotClient extends Client {
 	constructor() {

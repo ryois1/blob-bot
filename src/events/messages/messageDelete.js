@@ -1,4 +1,5 @@
-const { Events, EmbedBuilder } = require('discord.js');
+const { Events } = require('discord.js');
+const { EmbedResponse } = require('@src/structures');
 
 module.exports = {
 	name: Events.MessageDelete,
@@ -12,12 +13,14 @@ module.exports = {
 			});
 		});
 		const user = await client.users.fetch(message.author.id);
-		const deleteEmbed = new EmbedBuilder()
-			.setColor(client.config.EMBED_COLORS.ERROR)
-			.setAuthor({ name: `${user.tag}`, iconURL: user.displayAvatarURL({ dynamic: true }) })
-			.setDescription(`**Message sent by <@${user.id}> Deleted in <#${message.channelId}>**\n${message.content}`)
-			.setTimestamp()
-			.setFooter({ text: `Author: ${user.id} | Message ID: ${message.id}` });
-		await channel.send({ embeds: [deleteEmbed] });
+		const responseData = {
+			title: 'Pong 🏓!',
+			color: 'ERROR',
+			author: { name: `${user.tag}`, iconURL: user.displayAvatarURL({ dynamic: true }) },
+			description: `**Message sent by <@${user.id}> Deleted in <#${message.channelId}>**\n${message.content}`,
+			footer: { text: `Author: ${user.id} | Message ID: ${message.id}` },
+		};
+		const response = new EmbedResponse(responseData, client);
+		await channel.send({ embeds: [response.build()] });
 	},
 };

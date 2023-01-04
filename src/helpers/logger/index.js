@@ -1,5 +1,5 @@
 const { inspect } = require('util');
-const fs = require('fs');
+const fs = require('node:fs');
 
 const { EmbedBuilder, WebhookClient } = require('discord.js'),
 	chalk = require('chalk'),

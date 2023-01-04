@@ -1,4 +1,5 @@
-const { Events, EmbedBuilder } = require('discord.js');
+const { Events } = require('discord.js');
+const { EmbedResponse } = require('@src/structures');
 
 module.exports = {
 	name: Events.MessageBulkDelete,
@@ -9,11 +10,13 @@ module.exports = {
 				if (result.length) resolve(client.channels.cache.get(result[0].setting_value));
 			});
 		});
-		const deleteEmbed = new EmbedBuilder()
-			.setColor(client.config.EMBED_COLORS.ERROR)
-			.setAuthor({ name: `${channel.guild.name}`, iconURL: channel.guild.iconURL({ dynamic: true }) })
-			.setDescription(`**Bulk delete in <#${channel.id}>, ${messages.size} messages deleted**`)
-			.setTimestamp();
-		await targetChannel.send({ embeds: [deleteEmbed] });
+		const responseData = {
+			title: 'Pong 🏓!',
+			color: 'ERROR',
+			author: { name: `${channel.guild.name}`, iconURL: channel.guild.iconURL({ dynamic: true }) },
+			description: `**Bulk delete in <#${channel.id}>, ${messages.size} messages deleted**`,
+		};
+		const response = new EmbedResponse(responseData, client);
+		await targetChannel.send({ embeds: [response.build()] });
 	},
 };

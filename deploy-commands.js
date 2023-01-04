@@ -5,8 +5,8 @@ const { Client, REST, Routes, GatewayIntentBits } = require('discord.js');
 const config = process.env;
 const token = config.DISCORD_TOKEN;
 const clientId = config.DISCORD_CLIENT_ID;
-const path = require('path');
-const fs = require('fs');
+const path = require('node:path');
+const fs = require('node:fs');
 const pool = mysql.createPool({
 	host: config.MYSQL_HOST,
 	user: config.MYSQL_USER,
@@ -33,7 +33,10 @@ for (const folder of commandsFolders) {
 	for (const file of files) {
 		const command = require(`${commandsPath}/${folder}/${file}`);
 		const cmd = new command(client);
-		pool.query('INSERT INTO commands (command_name, command_category, globally_enabled, guilds_only) VALUES(?,?,?,?) ON DUPLICATE KEY UPDATE globally_enabled=? AND guilds_only=?', [cmd.name, cmd.category, cmd.globallyEnabled, cmd.guildOnly, cmd.globallyEnabled, cmd.guildOnly]);
+		console.log(`Found command "${cmd.name}", with flags "globallyEnabled": ${cmd.globallyEnabled} and "guildOnly": ${cmd.guildOnly}`);
+		pool.query('INSERT INTO commands (command_name, command_category, globally_enabled, guilds_only) VALUES(?,?,?,?) ON DUPLICATE KEY UPDATE globally_enabled=?, guilds_only=?', [cmd.name, cmd.category, cmd.globallyEnabled, cmd.guildOnly, cmd.globallyEnabled, cmd.guildOnly], async function(error) {
+			if (error) console.error(error);
+		});
 		commands.push(cmd.toJSON());
 	}
 }
@@ -49,13 +52,15 @@ const rest = new REST({ version: '10' }).setToken(token);
 			Routes.applicationCommands(clientId),
 			{ body: commands },
 		);
-
 		console.log(`Successfully reloaded ${data.length} application (/) commands.`);
-		pool.end();
 	}
 	catch (error) {
 		// And of course, make sure you catch and log any errors!
 		console.error(error);
+	}
+	finally {
 		pool.end();
+		console.log('Done');
+		process.exit();
 	}
 })();

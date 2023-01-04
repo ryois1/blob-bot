@@ -1,5 +1,5 @@
 const { ApplicationCommandOptionType } = require('discord.js');
-const { Command } = require('@src/structures');
+const { Command, EmbedResponse } = require('@src/structures');
 
 module.exports = class NameColor extends Command {
 	constructor(client) {
@@ -7,6 +7,7 @@ module.exports = class NameColor extends Command {
 			name: 'namecolor',
 			description: 'Specify a hex color for your name!',
 			category: 'fun',
+			guildOnly: true,
 			slashCommand: {
 				enabled: true,
 				options: [
@@ -24,7 +25,12 @@ module.exports = class NameColor extends Command {
 		const hex = interaction.options.getString('hex');
 		const regex = new RegExp(/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/);
 		if (hex == null) {
-			await interaction.reply({ content: 'Invalid hex', ephemeral: true });
+			const responseData = {
+				title: 'ERROR: I need a hex color',
+				color: 'ERROR',
+			};
+			const response = new EmbedResponse(responseData, interaction.client);
+			await interaction.reply({ embeds: [response.build()], ephemeral: true });
 		}
 		if (regex.test(hex) == true) {
 			const guild = interaction.guild;
@@ -41,10 +47,19 @@ module.exports = class NameColor extends Command {
 			else {
 				role.setColor(hex);
 			}
-			await interaction.reply({ content: `Changed your name's color to ${hex}!`, ephemeral: true });
+			const responseData = {
+				title: 'I successfully changed your name\'s color',
+			};
+			const response = new EmbedResponse(responseData, interaction.client);
+			await interaction.reply({ embeds: [response.build()], ephemeral: true });
 		}
 		else {
-			await interaction.reply({ content: 'Sorry, that\'s an invalid hex code. Must be in the format of #RRGGBB', ephemeral: true });
+			const responseData = {
+				title: 'ERROR: I need a valid hex color (#RRGGBB)',
+				color: 'ERROR',
+			};
+			const response = new EmbedResponse(responseData, interaction.client);
+			await interaction.reply({ embeds: [response.build()], ephemeral: true });
 		}
 	}
 };
