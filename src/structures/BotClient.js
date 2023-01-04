@@ -27,6 +27,7 @@ module.exports = class BotClient extends Client {
 
 	// Loads Commands for Bot
 	async loadCommands(directory) {
+		this.logger.log('Finding and loading commands...');
 		this.commands = new Collection();
 		const commandsFolders = fs.readdirSync(directory);
 		for (const folder of commandsFolders) {
@@ -44,6 +45,7 @@ module.exports = class BotClient extends Client {
 
 	// Loads Events for Bot
 	async loadEvents(directory) {
+		this.logger.log('Finding and loading events...');
 		const eventsFolders = fs.readdirSync(directory);
 		for (const folder of eventsFolders) {
 			const files = fs.readdirSync(`${directory}/${folder}`);
