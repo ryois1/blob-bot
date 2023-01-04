@@ -1,5 +1,4 @@
-const { EmbedBuilder } = require('discord.js');
-const { Command } = require('@src/structures');
+const { Command, EmbedResponse } = require('@src/structures');
 
 module.exports = class Pug extends Command {
 	constructor(client) {
@@ -14,10 +13,11 @@ module.exports = class Pug extends Command {
 	}
 	async execute(interaction) {
 		const res = await interaction.client.axios.get('https://dog.ceo/api/breed/pug/images/random');
-		const pugEmbed = new EmbedBuilder()
-			.setColor(interaction.client.config.EMBED_COLORS.BOT_EMBED)
-			.setTitle('🐶 Here is your pug!')
-			.setImage(res.data.message);
-		await interaction.reply({ embeds: [pugEmbed] });
+		const responseData = {
+			title: '🐶 Here is your pug!',
+			image: res.data.message,
+		};
+		const response = new EmbedResponse(responseData, interaction.client);
+		await interaction.reply({ embeds: [response.build()] });
 	}
 };

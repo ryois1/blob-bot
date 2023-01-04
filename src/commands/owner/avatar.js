@@ -1,5 +1,5 @@
 const { ApplicationCommandOptionType } = require('discord.js');
-const { Command } = require('@src/structures');
+const { Command, EmbedResponse } = require('@src/structures');
 
 module.exports = class Avatar extends Command {
 	constructor(client) {
@@ -22,8 +22,14 @@ module.exports = class Avatar extends Command {
 		});
 	}
 	async execute(interaction) {
-		interaction.client.user.setAvatar(interaction.options.getString('url'));
-		interaction.client.logger.log(`Successfully set the avatar of the bot to ${interaction.options.getString('url')}.`);
-		await interaction.reply({ content: 'Successfully set the avatar of the bot', ephemeral: true });
+		const url = interaction.options.getString('url');
+		interaction.client.user.setAvatar();
+		interaction.client.logger.log(`Successfully set the avatar of the bot to ${url}}.`);
+		const responseData = {
+			title: 'Successfully set the avatar of the bot',
+			image: url,
+		};
+		const response = new EmbedResponse(responseData, interaction.client);
+		await interaction.reply({ embeds: [response.build()] });
 	}
 };

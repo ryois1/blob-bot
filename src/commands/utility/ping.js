@@ -1,4 +1,4 @@
-const { Command } = require('@src/structures');
+const { Command, EmbedResponse } = require('@src/structures');
 
 module.exports = class Ping extends Command {
 	constructor(client) {
@@ -13,8 +13,19 @@ module.exports = class Ping extends Command {
 		});
 	}
 	async execute(interaction) {
-		// Respond with the time between now and when the user sent their message
-		const sent = await interaction.reply({ content: 'Pinging...', fetchReply: true });
-		interaction.editReply(`Pong 🏓! WebSocket Latency: ${interaction.client.ws.ping}ms. Round Trip Latency is ${sent.createdTimestamp - interaction.createdTimestamp}ms.`);
+		// Logic Section
+		const pingData = {
+			title: 'Pinging...',
+		};
+		const ping = new EmbedResponse(pingData, interaction.client);
+		const sent = await interaction.reply({ embeds: [ping.build()], fetchReply: true });
+
+		// Response Section
+		const responseData = {
+			title: 'Pong 🏓!',
+			fields: [{ name: 'WebSocket Latency', value: `${interaction.client.ws.ping}ms`, inline: true }, { name: 'WebSocket Latency', value: `${sent.createdTimestamp - interaction.createdTimestamp}ms.`, inline: true }],
+		};
+		const response = new EmbedResponse(responseData, interaction.client);
+		await interaction.editReply({ embeds: [response.build()] });
 	}
 };

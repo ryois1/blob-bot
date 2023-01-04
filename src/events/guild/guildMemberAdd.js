@@ -1,4 +1,5 @@
-const { Events, EmbedBuilder } = require('discord.js');
+const { Events } = require('discord.js');
+const { EmbedResponse } = require('@src/structures');
 
 module.exports = {
 	name: Events.GuildMemberAdd,
@@ -12,15 +13,15 @@ module.exports = {
 		const user = await client.users.fetch(guild.user.id);
 		const createdDate = user.createdAt;
 		const createdString = (createdDate.getMonth() + 1) + '/' + createdDate.getDate() + '/' + createdDate.getFullYear();
-		const memberAddEmbed = new EmbedBuilder()
-			.setColor(0x43B582)
-			.setAuthor({ name: `${user.tag} Joined`, iconURL: user.displayAvatarURL({ dynamic: true }) })
-			.setThumbnail(user.displayAvatarURL({ dynamic: true }))
-			.setDescription(`<@${user.id}> ${user.tag}`)
-			.addFields(
-				{ name: 'Created On', value: createdString })
-			.setTimestamp()
-			.setFooter({ text: `ID: ${user.id}` });
-		await channel.send({ embeds: [memberAddEmbed] });
+		const responseData = {
+			color: 'SUCCESS',
+			author: { name: `${user.tag} Joined`, iconURL: user.displayAvatarURL({ dynamic: true }) },
+			thumbnail: user.displayAvatarURL({ dynamic: true }),
+			description: `<@${user.id}> ${user.tag}`,
+			fields: { name: 'Created On', value: createdString },
+			footer: { text: `ID: ${user.id}` },
+		};
+		const response = new EmbedResponse(responseData, client);
+		await channel.send({ embeds: [response.build()] });
 	},
 };

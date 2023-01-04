@@ -1,5 +1,4 @@
-const { EmbedBuilder } = require('discord.js');
-const { Command } = require('@src/structures');
+const { Command, EmbedResponse } = require('@src/structures');
 // Import base command
 module.exports = class Dog extends Command {
 	constructor(client) {
@@ -18,10 +17,11 @@ module.exports = class Dog extends Command {
 				'x-api-key' : process.env.THAT_API_CO_KEY,
 			},
 		});
-		const dogEmbed = new EmbedBuilder()
-			.setColor(interaction.client.config.EMBED_COLORS.BOT_EMBED)
-			.setTitle('🐶 Here is your dog!')
-			.setImage(res.data[0].url);
-		await interaction.reply({ embeds: [dogEmbed] });
+		const responseData = {
+			title: '🐶 Here is your dog!',
+			image: res.data[0].url,
+		};
+		const response = new EmbedResponse(responseData, interaction.client);
+		await interaction.reply({ embeds: [response.build()] });
 	}
 };

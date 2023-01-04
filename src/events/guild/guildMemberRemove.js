@@ -1,4 +1,5 @@
-const { Events, EmbedBuilder } = require('discord.js');
+const { Events } = require('discord.js');
+const { EmbedResponse } = require('@src/structures');
 
 module.exports = {
 	name: Events.GuildMemberRemove,
@@ -10,13 +11,15 @@ module.exports = {
 			});
 		});
 		const user = await client.users.fetch(guild.user.id);
-		const memberRemoveEmbed = new EmbedBuilder()
-			.setColor(0xFF470F)
-			.setAuthor({ name: `${user.tag} Left`, iconURL: user.displayAvatarURL({ dynamic: true }) })
-			.setThumbnail(user.displayAvatarURL({ dynamic: true }))
-			.setDescription(`<@${user.id}> ${user.tag}`)
-			.setTimestamp()
-			.setFooter({ text: `ID: ${user.id}` });
-		await channel.send({ embeds: [memberRemoveEmbed] });
+
+		const responseData = {
+			color: 'ERROR',
+			author: { name: `${user.tag} Left`, iconURL: user.displayAvatarURL({ dynamic: true }) },
+			thumbnail: user.displayAvatarURL({ dynamic: true }),
+			description: `<@${user.id}> ${user.tag}`,
+			footer: { text: `ID: ${user.id}` },
+		};
+		const response = new EmbedResponse(responseData, client);
+		await channel.send({ embeds: [response.build()] });
 	},
 };

@@ -4,18 +4,18 @@ class Command {
 	* @property {import('discord.js').ApplicationCommandOptionType}
    	*/
 	/**
-     * @param {import('discord.js').Client} client - The discord client
-     * @param {CommandData} data - The command information
-     */
+    * @param {import('discord.js').Client} client - The discord client
+    * @param {CommandData} data - The command information
+    */
 	constructor(client, data) {
 		this.client = client;
 		this.name = data.name;
-		this.description = data.description || 'NONE';
-		this.category = data.category || 'NONE';
-		this.enabled = data.enabled || true;
-		this.guildOnly = data.guildOnly || false;
-		this.globallyEnabled = data.globallyEnabled || true;
-		this.ownerOnly = data.ownerOnly || false;
+		this.description = data.description ?? 'NONE';
+		this.category = data.category ?? 'NONE';
+		this.enabled = data.enabled ?? true;
+		this.guildOnly = data.guildOnly ?? false;
+		this.globallyEnabled = data.globallyEnabled ?? false;
+		this.ownerOnly = data.ownerOnly ?? false;
 		/**
          * @type {InteractionInfo}
          */
@@ -31,7 +31,6 @@ class Command {
 			this.slashCommand.options = data.slashCommand.options || [];
 		}
 	}
-
 
 	/**
      *
@@ -64,6 +63,5 @@ class Command {
 		};
 	}
 }
-
 
 module.exports = Command;

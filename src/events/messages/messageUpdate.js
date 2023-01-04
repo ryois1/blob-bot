@@ -1,4 +1,5 @@
-const { Events, EmbedBuilder } = require('discord.js');
+const { Events } = require('discord.js');
+const { EmbedResponse } = require('@src/structures');
 
 module.exports = {
 	name: Events.MessageUpdate,
@@ -16,17 +17,18 @@ module.exports = {
 			});
 		});
 		const user = await client.users.fetch(oldMessage.author.id);
-		const updateEmbed = new EmbedBuilder()
-			.setColor(client.config.EMBED_COLORS.WARNING)
-			.setAuthor({ name: `${user.tag}`, iconURL: user.displayAvatarURL({ dynamic: true }) })
-			.setDescription(`**Message edited in <#${oldMessage.channelId}>** [Jump to Message](${newMessage.url})`)
-			.addFields(
-				{ name: 'Before', value: oldMessage.content },
-				{ name: 'After', value: newMessage.content })
-			.setTimestamp()
-			.setFooter({ text: `Author: ${user.id} | Message ID: ${oldMessage.id}` });
+
+		const responseData = {
+			color: 'WARNING',
+			author: { name: `${user.tag}`, iconURL: user.displayAvatarURL({ dynamic: true }) },
+			fields: [{ name: 'Before', value: oldMessage.content }, { name: 'After', value: newMessage.content }],
+			description: `**Message edited in <#${oldMessage.channelId}>** [Jump to Message](${newMessage.url})`,
+			footer: { text: `Author: ${user.id} | Message ID: ${oldMessage.id}` },
+		};
+		const response = new EmbedResponse(responseData, client);
+
 		try {
-			await channel.send({ embeds: [updateEmbed] });
+			await channel.send({ embeds: [response.build()] });
 		}
 		catch (err) {
 			client.logger.error(err);
