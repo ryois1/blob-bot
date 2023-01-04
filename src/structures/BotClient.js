@@ -23,6 +23,9 @@ module.exports = class BotClient extends Client {
 
 		// Axios
 		this.axios = require('axios').default;
+
+		// store message cooldowns for commands
+		this.cmdCooldownCache = new Collection();
 	}
 
 	// Loads Commands for Bot
@@ -36,7 +39,7 @@ module.exports = class BotClient extends Client {
 				const command = require(`${directory}/${folder}/${file}`);
 				const cmd = new command(this);
 				if (cmd.slashCommand?.enabled) {
-					this.logger.log(`Loaded command "${cmd.name}"`);
+					this.logger.success(`Loaded command "${cmd.name}"`);
 					this.commands.set(cmd.name, cmd);
 				}
 			}
@@ -52,11 +55,11 @@ module.exports = class BotClient extends Client {
 			for (const file of files) {
 				const event = require(`${directory}/${folder}/${file}`);
 				if (event.once) {
-					this.logger.log(`Loaded one time event "${event.name}"`);
+					this.logger.success(`Loaded one time event "${event.name}"`);
 					this.once(event.name, (...args) => event.execute(...args, this));
 				}
 				else {
-					this.logger.log(`Loaded event "${event.name}"`);
+					this.logger.success(`Loaded event "${event.name}"`);
 					this.on(event.name, (...args) => event.execute(...args, this));
 				}
 			}

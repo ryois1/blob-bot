@@ -1,4 +1,5 @@
 require('module-alias/register');
+const logger = require('@src/helpers/logger');
 const mysql = require('mysql');
 const { Client, REST, Routes, GatewayIntentBits } = require('discord.js');
 
@@ -16,10 +17,10 @@ const pool = mysql.createPool({
 });
 pool.getConnection(function(err) {
 	if (err) {
-		console.error('Error error connecting to database.', err);
+		logger.error('Error error connecting to database.', err);
 		throw err;
 	}
-	console.log('Connected to database.');
+	logger.log('Connected to database.');
 });
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
@@ -33,9 +34,9 @@ for (const folder of commandsFolders) {
 	for (const file of files) {
 		const command = require(`${commandsPath}/${folder}/${file}`);
 		const cmd = new command(client);
-		console.log(`Found command "${cmd.name}", with flags "globallyEnabled": ${cmd.globallyEnabled} and "guildOnly": ${cmd.guildOnly}`);
+		logger.log(`Found command "${cmd.name}", with flags "globallyEnabled": ${cmd.globallyEnabled} and "guildOnly": ${cmd.guildOnly}`);
 		pool.query('INSERT INTO commands (command_name, command_category, globally_enabled, guilds_only) VALUES(?,?,?,?) ON DUPLICATE KEY UPDATE globally_enabled=?, guilds_only=?', [cmd.name, cmd.category, cmd.globallyEnabled, cmd.guildOnly, cmd.globallyEnabled, cmd.guildOnly], async function(error) {
-			if (error) console.error(error);
+			if (error) logger.error(error);
 		});
 		commands.push(cmd.toJSON());
 	}
@@ -46,21 +47,21 @@ const rest = new REST({ version: '10' }).setToken(token);
 
 (async () => {
 	try {
-		console.log(`Started refreshing ${commands.length} application (/) commands.`);
+		logger.log(`Started refreshing ${commands.length} application (/) commands.`);
 		// The put method is used to fully refresh all commands in the guild with the current set
 		const data = await rest.put(
 			Routes.applicationCommands(clientId),
 			{ body: commands },
 		);
-		console.log(`Successfully reloaded ${data.length} application (/) commands.`);
+		logger.success(`Successfully reloaded ${data.length} application (/) commands.`);
 	}
 	catch (error) {
 		// And of course, make sure you catch and log any errors!
-		console.error(error);
+		logger.error(error);
 	}
 	finally {
 		pool.end();
-		console.log('Done');
+		logger.log('Done');
 		process.exit();
 	}
 })();
