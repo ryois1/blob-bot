@@ -63,4 +63,4 @@ jobs:
           context: .
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: ryois/blob-bot:${{ steps.package-version.outputs.current-version}}
+          tags: ryois/blob-bot:${{ steps.package-version.outputs.current-version}},ryois/blob-bot:latest
